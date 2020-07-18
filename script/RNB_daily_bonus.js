@@ -1,6 +1,6 @@
 /*************************
 [Script]
-mixrnb签到 = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+mixrnb签到 = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
 *************************/
 
 //cookie
@@ -31,11 +31,26 @@ function gabeX() {
     return $persistentStore.read(key)
   }
 
+  const write = (value, key) => {
+    if (isQuanX) return $prefs.setValueForKey(value, key)
+    if (isSurge) return $persistentStore.write(value, key)
+  }
+  const read = (key) => {
+    if (isQuanX) return $prefs.valueForKey(key)
+    if (isSurge) return $persistentStore.read(key)
+  }
+
+  const notify = (title, subtitle, message) => {
+    $notification.post(title, subtitle, message)
+    $done();
+  }
+
   return {
     get,
     post,
     write,
-    read
+    read,
+    notify
   }
 };
 
@@ -48,13 +63,17 @@ var options = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.64',
   },
   body: {
-}
+  }
 }
 
 function getSecuritySessionVerify(error, response, body) {
-
   set_cookie = response['headers']['Set-Cookie'];
   set_cookies = set_cookie.split(";"); //字符分割
+
+  if (!set_cookies) {
+    $gabeX.notify('', '', '获取SecuritySessionVerify失败');
+  }
+
   options.headers.Cookie += ';' + set_cookies[0];
   options.url += '&security_verify_data=313932302c31303830';
 }
@@ -63,23 +82,28 @@ function getSecuritySessionVerify(error, response, body) {
 function getSecuritySessionMidVerify(error, response, body) {
   set_cookie = response['headers']['Set-Cookie'];
   set_cookies = set_cookie.split(";"); //字符分割
+
+  if (!set_cookies) {
+    $gabeX.notify('', '', '获取SecuritySessionMidVerify失败');
+  }
+
   options.headers.Cookie += ';' + set_cookies[0];
 }
 
-function getFormHash(error, response, body){
+function getFormHash(error, response, body) {
   const regex = /^<li><a\shref=\"member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">.*<\/a><\/li>$/gmi;
   const formhash = regex.exec(body)[1];
-
+  if (!formhash) {
+    $gabeX.notify('', '', '获取formhash失败');
+  }
   options.url = 'http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1';
-  // options.body.formhash = formhash,
-  // options.body.qdxq = 'kx',
-  options.body = 'formhash='+formhash+'&qdxq=kx'
+  options.body = 'formhash=' + formhash + '&qdxq=kx'
   options['headers']['Content-Type'] = 'application/x-www-form-urlencoded'
 
 }
 
-function decodeXml(error, response, body){
-  $notification.post('','',JSON.stringify(body));
+function decodeXml(error, response, body) {
+  $gabeX.notify('', '', JSON.stringify(body));
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
