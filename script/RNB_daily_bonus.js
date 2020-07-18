@@ -95,7 +95,8 @@ function getFormHash(error, response, body) {
 }
 
 function decodeXml(error, response, body) {
-  $gabeX.notify('', '', JSON.stringify(body));
+  // $gabeX.notify('', '', JSON.stringify(body));
+  $gabeX.notify('', '', $response.body(body));
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
