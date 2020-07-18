@@ -27,7 +27,7 @@ function gabeX() {
   const write = (value, key) => {
     return $persistentStore.write(value, key)
   }
-  
+
   const read = (key) => {
     return $persistentStore.read(key)
   }
