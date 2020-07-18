@@ -27,17 +27,9 @@ function gabeX() {
   const write = (value, key) => {
     return $persistentStore.write(value, key)
   }
+  
   const read = (key) => {
     return $persistentStore.read(key)
-  }
-
-  const write = (value, key) => {
-    if (isQuanX) return $prefs.setValueForKey(value, key)
-    if (isSurge) return $persistentStore.write(value, key)
-  }
-  const read = (key) => {
-    if (isQuanX) return $prefs.valueForKey(key)
-    if (isSurge) return $persistentStore.read(key)
   }
 
   const notify = (title, subtitle, message) => {
