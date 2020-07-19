@@ -4,8 +4,16 @@ mixrnb签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-p
 *************************/
 
 //cookie
-const R5nb_c8f5_auth = 'R5nb_c8f5_auth=4b1bsKzK7EbW%2Fmoaa6yWrqYiPNNBnBoL7aPZI8gEOohExVsK4zId05V9riHZd3S3k12PtTDW8SBUO7r%2FTITGi7NA7w';
-const saltkey = 'R5nb_c8f5_saltkey=iJFyCpfe';
+const R5nb_c8f5_auth = $persistentStore.read('R5nb_c8f5_auth');
+const saltkey = $persistentStore.read('R5nb_c8f5_saltkey');
+
+if (!saltkey) {
+  $gabeX.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+}
+
+if (!R5nb_c8f5_auth) {
+  $gabeX.notify('', '', '读取R5nb_c8f5_auth失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+}
 
 var error, response, body;
 var set_cookies = new Array();
