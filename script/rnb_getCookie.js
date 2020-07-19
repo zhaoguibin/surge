@@ -5,10 +5,11 @@
 $cookie = $request.headers.Cookie;
 
 const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
-const auth_regex = /(R5nb_c8f5_auth=(\S*);)/gm;
+const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
 
 const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
+const R5nb_c8f5_auth = auth_regex.exec($cookie);
 
-$notification.post('','',JSON.stringify(R5nb_c8f5_saltkey));
+$notification.post('','',JSON.stringify(R5nb_c8f5_saltkey[1]+R5nb_c8f5_auth[1]));
 // console.log($cookie);
 $done();
