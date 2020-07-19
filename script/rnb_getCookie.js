@@ -9,5 +9,5 @@ const auth_regex = /(R5nb_c8f5_auth=(\S*));/gmi;
 
 const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
 
-$notification.post('','',JSON.stringify(R5nb_c8f5_saltkey));
+$notification.post('','',JSON.stringify($cookie));
 $done();
