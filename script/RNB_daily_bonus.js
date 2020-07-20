@@ -122,7 +122,7 @@ function decodeXml(error, response, body) {
         $gabeX.notify('mixrnb签到提醒', '', message[mess_m[1]]);
     }
 
-    // $gabeX.notify('', '', JSON.stringify(body));
+    $gabeX.notify('', '', JSON.stringify(mess_m));
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
