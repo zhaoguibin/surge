@@ -103,26 +103,18 @@ function getFormHash(error, response, body) {
 
 function decodeXml(error, response, body) {
     //查看是否登录过期或者没登录
-    const message = new Array();
-
-    message['Äú½ñÈÕÒÑ¾­Çµ½£¬ÇëÃ÷ÌìÔÙÀ´£¡ '] = '您今日已经签到，请明天再来！';
-    message['¹§Ï²ÄãÇµ½³É¹¦!'] = '恭喜你签到成功!';
-    message['ÄúÐèÒªÏÈµÇÂ¼²ÅÄÜ¼ÌÐø±¾²Ù×÷'] = '您需要先登录才能继续本操作';
-
-    const login_regex = /'member\.php\?mod=logging&action=login', '(.*)',/gmi;
-    const login_m = login_regex.exec(body);
-    if (login_m) {
+    if (body.match('ÄúÐèÒªÏÈµÇÂ¼²ÅÄÜ¼ÌÐø±¾²Ù×÷')) {
         $gabeX.notify('mixrnb签到提醒', '', '未登录或者cookie失效，请重新获取cookie');
     }
 
-    const bouns_done_regex = /<div class="c">\n(Äú½ñÈÕÒÑ¾­Ç©µ½£¬ÇëÃ÷ÌìÔÙÀ´£¡ ).*<\/div>/gmi; //您今日已经签到，请明天再来！
-    const bouns_done = bouns_done_regex.exec(body);
-
-    if(bouns_done){
-        $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(message[bouns_done[1]]));
+    if (body.match('¹§Ï²ÄãÇµ½³É¹¦!')) {
+        $gabeX.notify('mixrnb签到提醒', '', '恭喜你签到成功!');
     }
 
-    // $gabeX.notify('', '', JSON.stringify(mess_m));
+    if (body.match('Äú½ñÈÕÒÑ¾­Çµ½£¬ÇëÃ÷ÌìÔÙÀ´£¡')) {
+        $gabeX.notify('mixrnb签到提醒', '', '您今日已经签到，请明天再来！');
+    }
+
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
