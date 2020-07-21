@@ -111,7 +111,7 @@ function decodeXml(error, response, body) {
         $gabeX.notify('mixrnb签到提醒', '', '恭喜你签到成功!');
     }
 
-    if (body.match('Äú½ñÈÕÒÑ¾­Çµ½£¬ÇëÃ÷ÌìÔÙÀ´£¡')) {
+    if (body.match('Äú½ñÈÕÒÑ¾­Ç©µ½£¬ÇëÃ÷ÌìÔÙÀ´£¡ ')) {
         $gabeX.notify('mixrnb签到提醒', '', '您今日已经签到，请明天再来！');
     }
 
