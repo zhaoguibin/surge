@@ -107,7 +107,7 @@ function decodeXml(error, response, body) {
         $gabeX.notify('mixrnb签到提醒', '', '未登录或者cookie失效，请重新获取cookie');
     }
 
-    if (body.match('¹§Ï²ÄãÇµ½³É¹¦!')) {
+    if (body.match('¹§Ï²ÄãÇ©µ½³É¹¦!')) {
         $gabeX.notify('mixrnb签到提醒', '', '恭喜你签到成功!');
     }
 
