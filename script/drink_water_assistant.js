@@ -1,6 +1,6 @@
 /*************************
  [Script]
- 喝水小助手.js = type=cron,cronexp=* * 9-17 * * 1-5,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/drink_water_assistant.js
+ 喝水小助手.js = type=cron,cronexp=0  9,10,11,12,13,14,15,16,17  1,2,3,4,5,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/drink_water_assistant.js
  *************************/
 
 var Date = new Date();
