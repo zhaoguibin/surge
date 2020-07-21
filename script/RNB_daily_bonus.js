@@ -115,6 +115,8 @@ function decodeXml(error, response, body) {
         $gabeX.notify('mixrnb签到提醒', '', '您今日已经签到，请明天再来！');
     }
 
+    $gabeX.notify('mixrnb签到提醒', '', body);
+
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
