@@ -103,19 +103,21 @@ function getFormHash(error, response, body) {
 
 function decodeXml(error, response, body) {
     //查看是否登录过期或者没登录
+    var message = '签到出错，请查看日志';
     if (body.match('ÄúÐèÒªÏÈµÇÂ¼²ÅÄÜ¼ÌÐø±¾²Ù×÷')) {
-        $gabeX.notify('mixrnb签到提醒', '', '未登录或者cookie失效，请重新获取cookie');
+        message = '未登录或者cookie失效，请重新获取cookie';
     }
 
     if (body.match('¹§Ï²ÄãÇ©µ½³É¹¦!')) {
-        $gabeX.notify('mixrnb签到提醒', '', '恭喜你签到成功!');
+        message = '恭喜你签到成功!';
     }
 
     if (body.match('Äú½ñÈÕÒÑ¾­Ç©µ½£¬ÇëÃ÷ÌìÔÙÀ´£¡ ')) {
-        $gabeX.notify('mixrnb签到提醒', '', '您今日已经签到，请明天再来！');
+        message = '您今日已经签到，请明天再来！';
     }
 
-    $gabeX.notify('mixrnb签到提醒', '', body);
+    console.log(body);
+    $gabeX.notify('mixrnb签到提醒', '', message);
 
 }
 
