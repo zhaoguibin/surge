@@ -1,6 +1,6 @@
 /*************************
  [Script]
- 喝水小助手.js = type=cron,cronexp=0 0 9-17 ? * MON-FRI,wake-system=1,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
+ 喝水小助手.js = type=cron,cronexp=0 0 9-17 ? * MON-FRI,wake-system=1,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/drink_water_assistant.js
  *************************/
 
 var myDate = new Date();
