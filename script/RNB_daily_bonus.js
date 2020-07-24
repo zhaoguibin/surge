@@ -2,7 +2,7 @@
  [Script]
  mixrnb签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
 
- 获取mixrnb的cookie = type=http-request,pattern=http:\/\/www\.mixrnb\.com\/space-uid-\d*\.html,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
+ 获取mixrnb的cookie = type=http-request,pattern=http:\/\/www\.mixrnb\.com\/space-uid-\d*\.html,tag=获取mixrnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
  访问个人空间获取到cookie，http://www.mixrnb.com/space-uid-*.html
  *************************/
 var error, response, body;
