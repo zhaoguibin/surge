@@ -43,8 +43,7 @@ if (isRequest) {
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-
-    $done({});
+    $done();
 }
 
 // Modified from yichahucha
