@@ -1,6 +1,6 @@
 /*************
-获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/home\.php\?mod=space&do=profile&mycenter=1,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js,script-update-interval=0
-访问个签到页面 https://www.hao4k.cn/home.php?mod=space&do=profile&mycenter=1
+获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/qiandao\/,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js,script-update-interval=0
+手机浏览器设置成请求桌面网站访问个签到页面 https://www.hao4k.cn/qiandao/
 **************/
 
 var error, response, body;
