@@ -1,5 +1,5 @@
 /*************
-获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/qiandao\/,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/rnb_getCookie.js,script-update-interval=0
+获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/qiandao\/,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_getCookie.js,script-update-interval=0
 访问个签到页面 https://www.hao4k.cn/qiandao/
 **************/
 $cookie = $request.headers.Cookie;
