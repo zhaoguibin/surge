@@ -10,40 +10,18 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     $cookie = $request.headers.Cookie;
 
-    $notification.post('', '', $cookie);
+    if (!$cookie) {
+        $notification.post('', '', '获取Hao4Kcookie失败');
+        $done();
+    }
 
-    // const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
-    // const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
+    $persistentStore.write($cookie, 'Hao4K_cookie');
 
-    // const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
-    // const R5nb_c8f5_auth = auth_regex.exec($cookie);
+    if (!$persistentStore.read('Hao4K_cookie')) {
+        $notification.post('', '', '保存Hao4Kcookie失败');
+        $done();
+    }
 
-    // if (!R5nb_c8f5_saltkey) {
-    //     $notification.post('', '', '获取R5nb_c8f5_saltkey失败');
-    //     $done();
-    // }
-
-    // if (!R5nb_c8f5_auth) {
-    //     $notification.post('', '', '获取R5nb_c8f5_auth失败');
-    //     $done();
-    // }
-
-    // $persistentStore.write(R5nb_c8f5_saltkey[1], 'R5nb_c8f5_saltkey');
-
-    // if (!$persistentStore.read('R5nb_c8f5_saltkey')) {
-    //     $notification.post('', '', '保存R5nb_c8f5_saltkey失败');
-    //     $done();
-    // }
-
-    // $persistentStore.write(R5nb_c8f5_auth[1], 'R5nb_c8f5_auth');
-
-    // if (!$persistentStore.read('R5nb_c8f5_auth')) {
-    //     $notification.post('', '', '保存R5nb_c8f5_auth失败');
-    //     $done();
-    // }
-
-    // $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    // $done();
+    $notification.post('', '', '获取cookie成功，请禁用此脚本');
+    $done();
 }
-
-$done();
