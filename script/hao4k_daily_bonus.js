@@ -108,6 +108,7 @@ function decodeXml(error, response, body) {
     }
 
     $gabeX.notify('Hao4k签到提醒', '', message);
+    $gabeX.notify('Hao4k签到提醒-1', '', body);
 
     console.log(body);
 }
