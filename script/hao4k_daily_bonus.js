@@ -99,13 +99,13 @@ function decodeXml(error, response, body) {
 
     //查看是否登录过期或者没登录
     var message = '签到出错，请查看日志';
-    if (body.match('今日已签')) {
-        message = '您今日已经签到，请明天再来！';
-    }
+    // if (body.match('今日已签')) {
+    //     message = '您今日已经签到，请明天再来！';
+    // }
 
-    // $gabeX.notify('Hao4k签到提醒', '', message);
+    var str_length = body.length;
 
-    console.log(body);
+    $gabeX.notify('Hao4k签到提醒', str_length, message);
 }
 
 setTimeout(function () {
