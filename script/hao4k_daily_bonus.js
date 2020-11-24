@@ -69,7 +69,6 @@ var $gabeX = gabeX();
 
 //cookie
 const Hao4K_cookie = $persistentStore.read('Hao4K_cookie');
-const Message_str = '';
 
 if (!Hao4K_cookie) {
     $gabeX.notify('', '', '读取Hao4K_cookie失败，请先访问[https://www.hao4k.cn/plugin.php?id=k_misign:sign]获取');
@@ -92,6 +91,7 @@ function getFormHash(error, response, body) {
     if (!formhash) {
         $gabeX.notify('', '', '获取formhash失败');
     }
+
     options.url = 'https://www.hao4k.cn/plugin.php?id=k_misign:sign&operation=qiandao&format=empty&inajax=1&ajaxtarget=JD_sign&formhash='+formhash;
 }
 
@@ -107,7 +107,6 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    Message_str += message;
     console.log(body);
 }
 
@@ -118,7 +117,5 @@ setTimeout(function () {
 setTimeout(function () {
     $gabeX.get(options, decodeXml);
 }, 2000);
-
-$gabeX.notify('hao4k签到提醒', '', Message_str);
 
 $done();
