@@ -107,6 +107,8 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
+    $gabeX.notify('Hao4k签到提醒', '', message);
+
     console.log(body);
 }
 
