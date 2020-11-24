@@ -1,6 +1,6 @@
 /*************
 [Script]
-hao4k签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js
+hao4k签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js
 
 获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/plugin\.php\?id=k_misign:sign,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js,script-update-interval=0
 访问签到页面 https://www.hao4k.cn/plugin.php?id=k_misign:sign
@@ -76,12 +76,23 @@ if (!Hao4K_cookie) {
 }
 
 var options = {
-    url: "https://www.hao4k.cn//plugin.php?id=k_misign:sign&operation=qiandao&formhash=f96403f0&format=empty&inajax=1&ajaxtarget=JD_sign",
+    url: "https://www.hao4k.cn",
     headers: {
         'Cookie': Hao4K_cookie,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.64',
     },
-    body: {}
+    body: {
+
+    }
+}
+
+function getFormHash(error, response, body) {
+    const regex = /<a\sclass="deanmesli6"\shref="member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">/gm;
+    const formhash = regex.exec(body)[1];
+    if (!formhash) {
+        $gabeX.notify('', '', '获取formhash失败');
+    }
+    options.url = 'https://www.hao4k.cn/plugin.php?id=k_misign:sign&operation=qiandao&format=empty&inajax=1&ajaxtarget=JD_sign&formhash='+formhash;
 }
 
 function decodeXml(error, response, body) {
@@ -101,7 +112,7 @@ function decodeXml(error, response, body) {
 }
 
 setTimeout(function () {
-    $gabeX.get(options, decodeXml);
+    $gabeX.get(options, getFormHash);
 }, 1000);
 
 setTimeout(function () {
