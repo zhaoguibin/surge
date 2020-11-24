@@ -99,16 +99,11 @@ function decodeXml(error, response, body) {
 
     //查看是否登录过期或者没登录
     var message = '签到出错，请查看日志';
-    if (body.match('未定义操作')) {
-        message = '未登录或者cookie失效，请重新获取cookie';
-    }
-
     if (body.match('今日已签')) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    $gabeX.notify('Hao4k签到提醒', '', message);
-    $gabeX.notify('Hao4k签到提醒-1', '', body);
+    // $gabeX.notify('Hao4k签到提醒', '', message);
 
     console.log(body);
 }
@@ -118,7 +113,11 @@ setTimeout(function () {
 }, 1000);
 
 setTimeout(function () {
-    $gabeX.get(options, decodeXml);
+    $gabeX.get(options, '');
 }, 2000);
+
+setTimeout(function () {
+    $gabeX.get(options, decodeXml);
+}, 3000);
 
 $done();
