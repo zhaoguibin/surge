@@ -84,7 +84,7 @@ var options = {
 }
 
 function getFormHash(error, response, body) {
-    const regex = /<a\sclass="deanmesli6"\shref="member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">/gm;
+    const regex = /<a\shref="member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">/gm;
     const formhash = regex.exec(body)[1];
     if (!formhash) {
         $gabeX.notify('', '', '获取formhash失败');
