@@ -1,6 +1,6 @@
 /*************
  [Script]
-我们所向往的-签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/wmsxwd.js
+ 我们所向往的-签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/wmsxwd.js
 
  获取cookie = type=http-request,pattern=https:\/\/wmsxwd\-a\.men\/user.?,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/wmsxwd.js,script-update-interval=0
  访问页面 https://wmsxwd-a.men/user
@@ -79,7 +79,7 @@ if (!Wmsxwd_cookie) {
 var options = {
     url: "https://wmsxwd-a.men/user/checkin",
     headers: {
-        ':scheme':'https',
+        ':scheme': 'https',
         'Cookie': Wmsxwd_cookie,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.64',
     },
