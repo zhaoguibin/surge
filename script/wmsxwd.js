@@ -11,24 +11,21 @@ var set_cookies = new Array();
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    
-    console.log($request);
-    $done();
 
-    // $cookie = $request.headers.cookie;
-    //
-    // if (!$cookie) {
-    //     $notification.post('', '', '获取【我们所向往的】cookie失败');
-    //     $done();
-    // }
-    //
-    // $persistentStore.write($cookie, 'Wmsxwd_cookie');
-    //
-    // if (!$persistentStore.read('Wmsxwd_cookie')) {
-    //     $notification.post('', '', '保存【我们所向往的】cookie失败');
-    //     $done();
-    // }
-    //
-    // $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    // $done();
+    $cookie = $request.headers.Cookie;
+
+    if (!$cookie) {
+        $notification.post('', '', '获取【我们所向往的】cookie失败');
+        $done();
+    }
+
+    $persistentStore.write($cookie, 'Wmsxwd_cookie');
+
+    if (!$persistentStore.read('Wmsxwd_cookie')) {
+        $notification.post('', '', '保存【我们所向往的】cookie失败');
+        $done();
+    }
+
+    $notification.post('', '', '获取cookie成功，请禁用此脚本');
+    $done();
 }
