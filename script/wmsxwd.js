@@ -92,5 +92,5 @@ function decodeMessage(error, response, body) {
 
     var obj = eval('(' + body + ')');
 
-    $gabeX.notify('Hao4k签到提醒', '', obj.msg);
+    $gabeX.notify('【我们所向往的】签到提醒', '', obj.msg);
 }
