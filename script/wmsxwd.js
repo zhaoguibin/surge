@@ -11,7 +11,7 @@ var set_cookies = new Array();
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    $cookie = $request.headers.Cookie;
+    $cookie = $request.headers.cookie;
 
     if (!$cookie) {
         $notification.post('', '', '获取【我们所向往的】cookie失败');
