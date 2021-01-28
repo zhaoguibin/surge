@@ -1,8 +1,8 @@
 /*************
  [Script]
-我们所向往的-签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js
+我们所向往的-签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/wmsxwd.js
 
- 获取cookie = type=http-request,pattern=https:\/\/wmsxwd-a.men\/user,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hao4k_daily_bonus.js,script-update-interval=0
+ 获取cookie = type=http-request,pattern=https:\/\/wmsxwd-a.men\/user,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/wmsxwd.js,script-update-interval=0
  访问页面 https://wmsxwd-a.men/user
  **************/
 
