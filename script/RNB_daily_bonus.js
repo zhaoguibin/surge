@@ -55,8 +55,9 @@ function gabeX() {
     }
 
     const getResponse = (options) => {
-        $httpClient.get(options, (error, response, body) => {
-            return response
+        $httpClient.get(options, function(error, response, body){
+            $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(response));
+            return response;
         })
     }
 
@@ -185,6 +186,10 @@ function decodeXml(error, response, body) {
 //     $gabeX.post(options, decodeXml);
 // }, 3500);
 
+let response = $gabeX.getResponse(options);
+
+// $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(response));
+
 function firstStep() {
 
     let response = $gabeX.getResponse(options);
@@ -217,8 +222,8 @@ async function sendPost() {
     // $gabeX.post(options, decodeXml);
 }
 
-sendPost().then(() => {
-    // Do something after run is successful.
-});
+// sendPost().then(() => {
+//     // Do something after run is successful.
+// });
 
 $done();
