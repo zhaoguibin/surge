@@ -113,8 +113,10 @@ function getSecuritySessionVerify(error, response, body) {
         $gabeX.notify('', '', '获取SecuritySessionVerify失败');
     }
 
-    options.headers.Cookie += ';' + set_cookies[0];
-    options.url += '&security_verify_data=313932302c31303830';
+    return { Cookie: set_cookies[0], url: '&security_verify_data=313932302c31303830'};
+
+    // options.headers.Cookie += ';' + set_cookies[0];
+    // options.url += '&security_verify_data=313932302c31303830';
 }
 
 
@@ -177,26 +179,23 @@ function decodeXml(error, response, body) {
 // }, 3500);
 
 async function firstStep() {
-    $gabeX.get(options, getSecuritySessionVerify);
-    $gabeX.notify('mixrnb签到提醒', '', 1);
+    return $gabeX.get(options, getSecuritySessionVerify);
 }
 
 async function secondStep() {
     $gabeX.get(options, getSecuritySessionMidVerify);
-    $gabeX.notify('mixrnb签到提醒', '', 2);
 }
 
 async function thirdStep() {
     $gabeX.get(options, getFormHash);
-    $gabeX.notify('mixrnb签到提醒', '', 3);
 }
 
 async function sendPost() {
-    await firstStep();
-    await secondStep();
-    await thirdStep();
-    $gabeX.notify('mixrnb签到提醒', '', 4);
-    $gabeX.post(options, decodeXml);
+    let firstStep = await firstStep();
+    console.log(JSON.stringify(firstStep));
+    // await secondStep();
+    // await thirdStep();
+    // $gabeX.post(options, decodeXml);
 }
 
 sendPost().then(() => {
