@@ -156,7 +156,7 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    console.log(body);
+    // console.log(body);
     $gabeX.notify('mixrnb签到提醒', '', message);
 
 }
@@ -178,20 +178,24 @@ function decodeXml(error, response, body) {
 
 async function firstStep() {
     $gabeX.get(options, getSecuritySessionVerify);
+    $gabeX.notify('mixrnb签到提醒', '', 1);
 }
 
 async function secondStep() {
     $gabeX.get(options, getSecuritySessionMidVerify);
+    $gabeX.notify('mixrnb签到提醒', '', 2);
 }
 
 async function thirdStep() {
     $gabeX.get(options, getFormHash);
+    $gabeX.notify('mixrnb签到提醒', '', 3);
 }
 
 async function sendPost() {
     await firstStep();
     await secondStep();
     await thirdStep();
+    $gabeX.notify('mixrnb签到提醒', '', 4);
     $gabeX.post(options, decodeXml);
 }
 
