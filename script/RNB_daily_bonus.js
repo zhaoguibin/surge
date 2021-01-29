@@ -54,6 +54,12 @@ function gabeX() {
         })
     }
 
+    const getResponse = (options) => {
+        $httpClient.get(options, (error, response, body) => {
+            return response
+        })
+    }
+
     const post = (options, callback) => {
         $httpClient.post(options, (error, response, body) => {
             callback(error, response, body)
@@ -75,6 +81,7 @@ function gabeX() {
 
     return {
         get,
+        getResponse,
         post,
         write,
         read,
@@ -179,7 +186,18 @@ function decodeXml(error, response, body) {
 // }, 3500);
 
 async function firstStep() {
-    return $gabeX.get(options, getSecuritySessionVerify);
+
+    let response = $gabeX.getResponse(options);
+    set_cookie = response['headers']['Set-Cookie'];
+    set_cookies = set_cookie.split(";"); //字符分割
+
+    if (!set_cookies) {
+        $gabeX.notify('', '', '获取SecuritySessionVerify失败');
+    }
+
+    return { Cookie: set_cookies[0], url: '&security_verify_data=313932302c31303830'};
+
+    // return $gabeX.get(options, getSecuritySessionVerify);
 }
 
 async function secondStep() {
