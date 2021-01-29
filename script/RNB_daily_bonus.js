@@ -54,13 +54,6 @@ function gabeX() {
         })
     }
 
-    const getResponse = (options) => {
-        $httpClient.get(options, function(error, response, body){
-            $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(response));
-            return response;
-        })
-    }
-
     const post = (options, callback) => {
         $httpClient.post(options, (error, response, body) => {
             callback(error, response, body)
@@ -82,7 +75,6 @@ function gabeX() {
 
     return {
         get,
-        getResponse,
         post,
         write,
         read,
@@ -121,10 +113,8 @@ function getSecuritySessionVerify(error, response, body) {
         $gabeX.notify('', '', '获取SecuritySessionVerify失败');
     }
 
-    return { Cookie: set_cookies[0], url: '&security_verify_data=313932302c31303830'};
-
-    // options.headers.Cookie += ';' + set_cookies[0];
-    // options.url += '&security_verify_data=313932302c31303830';
+    options.headers.Cookie += ';' + set_cookies[0];
+    options.url += '&security_verify_data=313932302c31303830';
 }
 
 
@@ -166,64 +156,25 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    // console.log(body);
+    console.log(body);
     $gabeX.notify('mixrnb签到提醒', '', message);
 
 }
 
-// $gabeX.get(options, getSecuritySessionVerify);
+$gabeX.get(options, getSecuritySessionVerify);
 
-// setTimeout(function () {
-//     $gabeX.get(options, getSecuritySessionMidVerify);
-// }, 1000);
-
-// setTimeout(function () {
-//     $gabeX.get(options, getFormHash);
-// }, 2000);
-
-
-// setTimeout(function () {
-//     $gabeX.post(options, decodeXml);
-// }, 3500);
-
-let response = $gabeX.getResponse(options);
-
-// $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(response));
-
-function firstStep() {
-
-    let response = $gabeX.getResponse(options);
-    set_cookie = response['headers']['Set-Cookie'];
-    set_cookies = set_cookie.split(";"); //字符分割
-
-    if (!set_cookies) {
-        $gabeX.notify('', '', '获取SecuritySessionVerify失败');
-    }
-
-    return { Cookie: set_cookies[0], url: '&security_verify_data=313932302c31303830'};
-
-    // return $gabeX.get(options, getSecuritySessionVerify);
-}
-
-async function secondStep() {
+setTimeout(function () {
     $gabeX.get(options, getSecuritySessionMidVerify);
-}
+}, 1000);
 
-async function thirdStep() {
+setTimeout(function () {
     $gabeX.get(options, getFormHash);
-}
+}, 2000);
 
-async function sendPost() {
-    let firstStep = await firstStep();
 
-    $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(firstStep));
-    // await secondStep();
-    // await thirdStep();
-    // $gabeX.post(options, decodeXml);
-}
+setTimeout(function () {
+    $gabeX.post(options, decodeXml);
+}, 3500);
 
-// sendPost().then(() => {
-//     // Do something after run is successful.
-// });
 
 $done();
