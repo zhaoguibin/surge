@@ -185,7 +185,7 @@ function decodeXml(error, response, body) {
 //     $gabeX.post(options, decodeXml);
 // }, 3500);
 
-async function firstStep() {
+function firstStep() {
 
     let response = $gabeX.getResponse(options);
     set_cookie = response['headers']['Set-Cookie'];
@@ -210,7 +210,8 @@ async function thirdStep() {
 
 async function sendPost() {
     let firstStep = await firstStep();
-    console.log(JSON.stringify(firstStep));
+
+    $gabeX.notify('mixrnb签到提醒', '', JSON.stringify(firstStep));
     // await secondStep();
     // await thirdStep();
     // $gabeX.post(options, decodeXml);
