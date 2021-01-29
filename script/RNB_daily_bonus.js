@@ -195,4 +195,8 @@ async function sendPost() {
     $gabeX.post(options, decodeXml);
 }
 
+sendPost().then(() => {
+    // Do something after run is successful.
+});
+
 $done();
