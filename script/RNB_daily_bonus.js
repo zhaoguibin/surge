@@ -161,20 +161,38 @@ function decodeXml(error, response, body) {
 
 }
 
-$gabeX.get(options, getSecuritySessionVerify);
+// $gabeX.get(options, getSecuritySessionVerify);
 
-setTimeout(function () {
+// setTimeout(function () {
+//     $gabeX.get(options, getSecuritySessionMidVerify);
+// }, 1000);
+
+// setTimeout(function () {
+//     $gabeX.get(options, getFormHash);
+// }, 2000);
+
+
+// setTimeout(function () {
+//     $gabeX.post(options, decodeXml);
+// }, 3500);
+
+async function firstStep() {
+    $gabeX.get(options, getSecuritySessionVerify);
+}
+
+async function secondStep() {
     $gabeX.get(options, getSecuritySessionMidVerify);
-}, 1000);
+}
 
-setTimeout(function () {
+async function thirdStep() {
     $gabeX.get(options, getFormHash);
-}, 2000);
+}
 
-
-setTimeout(function () {
+async function sendPost() {
+    await firstStep();
+    await secondStep();
+    await thirdStep();
     $gabeX.post(options, decodeXml);
-}, 3500);
-
+}
 
 $done();
