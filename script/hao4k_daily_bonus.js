@@ -91,6 +91,10 @@ function getFormHash(error, response, body) {
     }
 
     options.url = 'https://www.hao4k.cn/plugin.php?id=k_misign:sign&operation=qiandao&format=empty&inajax=1&ajaxtarget=JD_sign&formhash=' + formhash;
+
+    $gabeX.get(options, function(){
+        $gabeX.get(options, decodeXml);
+    });
 }
 
 function decodeXml(error, response, body) {
@@ -103,16 +107,16 @@ function decodeXml(error, response, body) {
     $gabeX.notify('Hao4k签到提醒', '', message);
 }
 
-setTimeout(function () {
-    $gabeX.get(options, getFormHash);
-}, 1000);
+$gabeX.get(options, getFormHash);
 
-setTimeout(function () {
-    $gabeX.get(options, '');
-}, 2000);
+// setTimeout(function () {
+//     $gabeX.get(options, function(){
+//         $gabeX.get(options, decodeXml);
+//     });
+// }, 2000);
 
-setTimeout(function () {
-    $gabeX.get(options, decodeXml);
-}, 3000);
+// setTimeout(function () {
+//     $gabeX.get(options, decodeXml);
+// }, 3000);
 
 $done();
