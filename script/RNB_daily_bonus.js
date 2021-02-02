@@ -115,6 +115,8 @@ function getSecuritySessionVerify(error, response, body) {
 
     options.headers.Cookie += ';' + set_cookies[0];
     options.url += '&security_verify_data=313932302c31303830';
+
+    $gabeX.get(options, getSecuritySessionMidVerify);
 }
 
 
@@ -127,6 +129,8 @@ function getSecuritySessionMidVerify(error, response, body) {
     }
 
     options.headers.Cookie += ';' + set_cookies[0];
+
+    $gabeX.get(options, getFormHash);
 }
 
 function getFormHash(error, response, body) {
@@ -139,6 +143,7 @@ function getFormHash(error, response, body) {
     options.body = 'formhash=' + formhash + '&qdxq=kx'
     options['headers']['Content-Type'] = 'application/x-www-form-urlencoded'
 
+    $gabeX.post(options, decodeXml);
 }
 
 function decodeXml(error, response, body) {
@@ -162,19 +167,5 @@ function decodeXml(error, response, body) {
 }
 
 $gabeX.get(options, getSecuritySessionVerify);
-
-setTimeout(function () {
-    $gabeX.get(options, getSecuritySessionMidVerify);
-}, 1000);
-
-setTimeout(function () {
-    $gabeX.get(options, getFormHash);
-}, 2000);
-
-
-setTimeout(function () {
-    $gabeX.post(options, decodeXml);
-}, 3500);
-
 
 $done();
