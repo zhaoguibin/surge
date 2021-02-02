@@ -6,9 +6,6 @@
  访问签到页面 https://www.hao4k.cn/plugin.php?id=k_misign:sign
  **************/
 
-var error, response, body;
-var set_cookies = new Array();
-
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
     $cookie = $request.headers.Cookie;
@@ -108,15 +105,5 @@ function decodeXml(error, response, body) {
 }
 
 $gabeX.get(options, getFormHash);
-
-// setTimeout(function () {
-//     $gabeX.get(options, function(){
-//         $gabeX.get(options, decodeXml);
-//     });
-// }, 2000);
-
-// setTimeout(function () {
-//     $gabeX.get(options, decodeXml);
-// }, 3000);
 
 $done();
