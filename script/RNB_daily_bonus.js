@@ -13,7 +13,6 @@ if (isRequest) {
 
     const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
     const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
-
     const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
     const R5nb_c8f5_auth = auth_regex.exec($cookie);
 
@@ -118,7 +117,6 @@ function getSecuritySessionVerify(error, response, body) {
     $gabeX.get(options, getSecuritySessionMidVerify);
 }
 
-
 function getSecuritySessionMidVerify(error, response, body) {
     set_cookie = response['headers']['Set-Cookie'];
     set_cookies = set_cookie.split(";"); //字符分割
@@ -160,7 +158,6 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    console.log(body);
     $gabeX.notify('mixrnb签到提醒', '', message);
 
 }
