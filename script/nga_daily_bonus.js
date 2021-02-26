@@ -124,5 +124,9 @@ var options = {
 
 $gabeX.post(options, decodeXml);
 
+function decodeXml(error, response, body) {
+    console.log(body);
+}
+
 
 $done();
