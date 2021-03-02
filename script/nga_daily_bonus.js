@@ -3,10 +3,10 @@
  NGA刮墙.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/nga_daily_bonus.js
 
  获取nga的cookie = type=http-request,pattern= https:\/\/ngabbs.com\/misc\/mission\/mission\.php,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/nga_daily_bonus.js,script-update-interval=0
- 进入到NGA刮墙页面
+ 进入到NGA-APP任务界面获取cookie
 
  [MITM]
- hostname = *.ngabbs.com
+ hostname = ngabbs.com
  **************/
 
 const isRequest = typeof $request != "undefined"
@@ -81,7 +81,7 @@ var options = {
         'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryAgjAve4UZAXpjupu',
         'Origin': 'https://ngabbs.com',
         'Accept-Encoding': 'gzip, deflate, br',
-        'Cookie': 'ngacn0comInfoCheckTime=1614300695; ngacn0comUserInfo=6LW15qGC5b2s%096LW15qGC5b2s%0939%0939%09%0910%091000%094%090%090%0961_8; ngacn0comUserInfoCheck=3d0f2586d6a3d441ab9f991ed691787d',
+        'Cookie': NGA_cookie,
         'Connection': 'keep-alive',
         'Accept': '*/*',
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NGA_skull/7.1.8',
