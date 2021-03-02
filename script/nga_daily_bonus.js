@@ -1,48 +1,3 @@
-/*************************
- [Script]
- mixrnb签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
-
- 获取mixrnb的cookie = type=http-request,pattern=http:\/\/www.mixrnb.com\/plugin\.php\?id=dsu_paulsign:sign,tag=获取mixrnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
- 签到页面获取到cookie，http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign
- *************************/
-
-// const isRequest = typeof $request != "undefined"
-// if (isRequest) {
-//     $cookie = $request.headers.Cookie;
-//
-//     const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
-//     const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
-//     const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
-//     const R5nb_c8f5_auth = auth_regex.exec($cookie);
-//
-//     if (!R5nb_c8f5_saltkey) {
-//         $notification.post('', '', '获取R5nb_c8f5_saltkey失败');
-//         $done();
-//     }
-//
-//     if (!R5nb_c8f5_auth) {
-//         $notification.post('', '', '获取R5nb_c8f5_auth失败');
-//         $done();
-//     }
-//
-//     $persistentStore.write(R5nb_c8f5_saltkey[1], 'R5nb_c8f5_saltkey');
-//
-//     if (!$persistentStore.read('R5nb_c8f5_saltkey')) {
-//         $notification.post('', '', '保存R5nb_c8f5_saltkey失败');
-//         $done();
-//     }
-//
-//     $persistentStore.write(R5nb_c8f5_auth[1], 'R5nb_c8f5_auth');
-//
-//     if (!$persistentStore.read('R5nb_c8f5_auth')) {
-//         $notification.post('', '', '保存R5nb_c8f5_auth失败');
-//         $done();
-//     }
-//
-//     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-//     $done();
-// }
-
 // Modified from yichahucha
 function gabeX() {
     const get = (options, callback) => {
@@ -81,18 +36,6 @@ function gabeX() {
 
 var $gabeX = gabeX();
 
-//cookie
-// const R5nb_c8f5_auth = $persistentStore.read('R5nb_c8f5_auth');
-// const saltkey = $persistentStore.read('R5nb_c8f5_saltkey');
-//
-// if (!saltkey) {
-//     $gabeX.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
-// }
-//
-// if (!R5nb_c8f5_auth) {
-//     $gabeX.notify('', '', '读取R5nb_c8f5_auth失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
-// }
-
 var options = {
     url: "https://ngabbs.com/nuke.php",
     headers: {
@@ -108,23 +51,25 @@ var options = {
         'Content-Length':'1091',
         'Accept-Language':'zh-cn'
     },
-    body: {
-        '__lib':'check_in',
-        '__output':'11',
-        'app_id':'1001',
-        'device':'iOS;aef8689c8c5df6b42f4b500bfdd72cfacee0e8e27e05c0fb8b95681f816d66aa',
-        '__act':'check_in',
-        'access_uid':'60082372',
-        'access_token':'X8mvmakltq9ms97u99s4i28vmvvr2s8uil8ll957',
-        '__ngaClientChecksum':'920c72fe416351cb6bd6adb05dd43d501614300728',
-        '__inchst':'UTF-8',
-    }
+    body: "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__lib\"\r\n\r\ncheck_in\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__output\"\r\n\r\n11\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"app_id\"\r\n\r\n1001\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"device\"\r\n\r\niOS;aef8689c8c5df6b42f4b500bfdd72cfacee0e8e27e05c0fb8b95681f816d66aa\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__act\"\r\n\r\ncheck_in\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_uid\"\r\n\r\n60082372\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\nX8mvmakltq9ms97u99s4i28vmvvr2s8uil8ll957\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__ngaClientChecksum\"\r\n\r\n920c72fe416351cb6bd6adb05dd43d501614300728\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__inchst\"\r\n\r\nUTF-8\r\n------WebKitFormBoundaryAgjAve4UZAXpjupu--\r\n\r\n"
 }
 
 
-$gabeX.post(options, decodeXml);
+$gabeX.post(options, decodeJson);
 
-function decodeXml(error, response, body) {
+function decodeJson(errors, response, body) {
+    let data = JSON.parse(body);
+    let msg = '';
+
+    if(data.data){
+        msg = data.data[0];
+    }else if(data.error){
+        msg = data.error[0];
+    }else{
+        msg = data;
+    }
+
+    $gabeX.notify('nga签到','',msg);
     console.log(body);
 }
 
