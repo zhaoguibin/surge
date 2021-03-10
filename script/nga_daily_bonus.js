@@ -13,7 +13,7 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let cookie = $request.headers.Cookie;
     if (!cookie) {
-        $notification.post('', '', '获取NGA失败');
+        $notification.post('', '', '获取NGA_cookie失败');
         $done();
     }
 
