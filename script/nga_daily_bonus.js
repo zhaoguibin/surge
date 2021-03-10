@@ -20,25 +20,19 @@ if (isRequest) {
     let access_uid;
     let access_token;
 
-    const access_uid_reg = /ngaPassportCid=([\w\s\d]*)/;
-    access_uid = access_uid_reg.exec(cookie)[1];
-
-    if (!access_uid) {
-        $notification.post('', '', '获取access_uid失败');
-        $done();
-    }
-
-    const access_token_reg = /ngaPassportUid=([\w\s\d]*)/;
+    const access_token_reg = /ngaPassportCid=([\w\s\d]*)/;
     access_token = access_token_reg.exec(cookie)[1];
 
-    if (!access_uid) {
+    if (!access_token) {
         $notification.post('', '', '获取access_token失败');
         $done();
     }
 
-    $persistentStore.write(cookie, 'NGA_cookie');
-    if (!$persistentStore.read('NGA_cookie')) {
-        $notification.post('', '', '保存NGA_cookie失败');
+    const access_uid_reg = /ngaPassportUid=([\w\s\d]*)/;
+    access_uid = access_uid_reg.exec(cookie)[1];
+
+    if (!access_uid) {
+        $notification.post('', '', '获取access_uid失败');
         $done();
     }
 
