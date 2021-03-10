@@ -91,21 +91,12 @@ function gabeX() {
 
 var $gabeX = gabeX();
 
-//cookie
-const NGA_cookie = $persistentStore.read('NGA_cookie');
-
-if (!NGA_cookie) {
-    $gabeX.notify('', '', '读取NGA_cookie失败，请手机浏览器登录https://bbs.nga.cn获取');
-}
-
 const NGA_access_uid = $persistentStore.read('NGA_access_uid');
-
 if (!NGA_access_uid) {
     $gabeX.notify('', '', '读取NGA_access_uid失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
 const NGA_access_token = $persistentStore.read('NGA_access_token');
-
 if (!NGA_access_token) {
     $gabeX.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
@@ -192,6 +183,5 @@ function addUpDailyBonus() {
         console.log(JSON.parse(body))
     });
 }
-
 
 $done();
