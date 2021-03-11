@@ -1,8 +1,8 @@
 /*************************
  [Script]
- mixrnb签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
+ mixRnb签到.js = type=cron,cronexp=35 8 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js
 
- 获取mixrnb的cookie = type=http-request,pattern=http:\/\/www.mixrnb.com\/plugin\.php\?id=dsu_paulsign:sign,tag=获取mixrnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
+ 获取mixRnb的cookie = type=http-request,pattern=http:\/\/www.mixrnb.com\/plugin\.php\?id=dsu_paulsign:sign,tag=获取mixRnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
  签到页面获取到cookie，http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign
  *************************/
 let set_cookies = [];
@@ -158,7 +158,7 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    $gabeX.notify('mixrnb签到提醒', '', message);
+    $gabeX.notify('mixRnb签到提醒', '', message);
 
 }
 
