@@ -8,14 +8,14 @@
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    $cookie = $request.headers.Cookie;
+    let cookie = $request.headers.Cookie;
 
-    if (!$cookie) {
+    if (!cookie) {
         $notification.post('', '', '获取Hao4Kcookie失败');
         $done();
     }
 
-    $persistentStore.write($cookie, 'Hao4K_cookie');
+    $persistentStore.write(cookie, 'Hao4K_cookie');
 
     if (!$persistentStore.read('Hao4K_cookie')) {
         $notification.post('', '', '保存Hao4Kcookie失败');
@@ -62,7 +62,7 @@ function gabeX() {
     }
 }
 
-var $gabeX = gabeX();
+let $gabeX = gabeX();
 
 //cookie
 const Hao4K_cookie = $persistentStore.read('Hao4K_cookie');
@@ -71,7 +71,7 @@ if (!Hao4K_cookie) {
     $gabeX.notify('', '', '读取Hao4K_cookie失败，请先访问[https://www.hao4k.cn/plugin.php?id=k_misign:sign]获取');
 }
 
-var options = {
+let options = {
     url: "https://www.hao4k.cn",
     headers: {
         'Cookie': Hao4K_cookie,
@@ -89,14 +89,14 @@ function getFormHash(error, response, body) {
 
     options.url = 'https://www.hao4k.cn/plugin.php?id=k_misign:sign&operation=qiandao&format=empty&inajax=1&ajaxtarget=JD_sign&formhash=' + formhash;
 
-    $gabeX.get(options, function(){
+    $gabeX.get(options, function () {
         $gabeX.get(options, decodeXml);
     });
 }
 
 function decodeXml(error, response, body) {
     //查看是否登录过期或者没登录
-    var message = '签到出错';
+    let message = '签到出错';
     if (body.length < 75) {
         message = '签到成功';
     }

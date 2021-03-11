@@ -89,7 +89,7 @@ function gabeX() {
     }
 }
 
-var $gabeX = gabeX();
+let $gabeX = gabeX();
 
 const NGA_access_uid = $persistentStore.read('NGA_access_uid');
 if (!NGA_access_uid) {
@@ -101,7 +101,7 @@ if (!NGA_access_token) {
     $gabeX.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
-var options = {
+let options = {
     url: "https://ngabbs.com/nuke.php",
     headers: {
         'Host': 'ngabbs.com',
@@ -140,7 +140,7 @@ function decodeJson(errors, response, body) {
 
 //每日签到得银币
 function dailySilverCoins() {
-    var options = {
+    let options = {
         url: "https://ngabbs.com/nuke.php",
         headers: {
             'Host': 'ngabbs.com',
@@ -164,7 +164,7 @@ function dailySilverCoins() {
 
 //每日签到得N币
 function dailyNCoins() {
-    var options = {
+    let options = {
         url: "https://ngabbs.com/nuke.php",
         headers: {
             'Host': 'ngabbs.com',
@@ -188,7 +188,7 @@ function dailyNCoins() {
 
 //累计签到365天
 function addUpDailyBonus() {
-    var options = {
+    let options = {
         url: "https://ngabbs.com/nuke.php",
         headers: {
             'Host': 'ngabbs.com',

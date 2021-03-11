@@ -5,19 +5,19 @@
  获取mixrnb的cookie = type=http-request,pattern=http:\/\/www.mixrnb.com\/plugin\.php\?id=dsu_paulsign:sign,tag=获取mixrnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/RNB_daily_bonus.js,script-update-interval=0
  签到页面获取到cookie，http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign
  *************************/
-var set_cookies = new Array();
+let set_cookies = [];
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    $cookie = $request.headers.Cookie;
+    let cookie = $request.headers.Cookie;
 
-    const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
+    const saltKey_regex = /(R5nb_c8f5_saltKey=\S*)/gm;
     const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
-    const R5nb_c8f5_saltkey = saltkey_regex.exec($cookie);
-    const R5nb_c8f5_auth = auth_regex.exec($cookie);
+    const R5nb_c8f5_saltKey = saltKey_regex.exec(cookie);
+    const R5nb_c8f5_auth = auth_regex.exec(cookie);
 
-    if (!R5nb_c8f5_saltkey) {
-        $notification.post('', '', '获取R5nb_c8f5_saltkey失败');
+    if (!R5nb_c8f5_saltKey) {
+        $notification.post('', '', '获取R5nb_c8f5_saltKey失败');
         $done();
     }
 
@@ -26,10 +26,10 @@ if (isRequest) {
         $done();
     }
 
-    $persistentStore.write(R5nb_c8f5_saltkey[1], 'R5nb_c8f5_saltkey');
+    $persistentStore.write(R5nb_c8f5_saltKey[1], 'R5nb_c8f5_saltKey');
 
-    if (!$persistentStore.read('R5nb_c8f5_saltkey')) {
-        $notification.post('', '', '保存R5nb_c8f5_saltkey失败');
+    if (!$persistentStore.read('R5nb_c8f5_saltKey')) {
+        $notification.post('', '', '保存R5nb_c8f5_saltKey失败');
         $done();
     }
 
@@ -80,31 +80,31 @@ function gabeX() {
     }
 }
 
-var $gabeX = gabeX();
+let $gabeX = gabeX();
 
 //cookie
 const R5nb_c8f5_auth = $persistentStore.read('R5nb_c8f5_auth');
-const saltkey = $persistentStore.read('R5nb_c8f5_saltkey');
+const saltKey = $persistentStore.read('R5nb_c8f5_saltKey');
 
-if (!saltkey) {
-    $gabeX.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+if (!saltKey) {
+    $gabeX.notify('', '', '读取R5nb_c8f5_saltKey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
 }
 
 if (!R5nb_c8f5_auth) {
     $gabeX.notify('', '', '读取R5nb_c8f5_auth失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
 }
 
-var options = {
+let options = {
     url: "http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign",
     headers: {
-        'Cookie': R5nb_c8f5_auth + ';' + saltkey,
+        'Cookie': R5nb_c8f5_auth + ';' + saltKey,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.64',
     },
     body: {}
 }
 
 function getSecuritySessionVerify(error, response, body) {
-    set_cookie = response['headers']['Set-Cookie'];
+    let set_cookie = response['headers']['Set-Cookie'];
     set_cookies = set_cookie.split(";"); //字符分割
 
     if (!set_cookies) {
@@ -118,7 +118,7 @@ function getSecuritySessionVerify(error, response, body) {
 }
 
 function getSecuritySessionMidVerify(error, response, body) {
-    set_cookie = response['headers']['Set-Cookie'];
+    let set_cookie = response['headers']['Set-Cookie'];
     set_cookies = set_cookie.split(";"); //字符分割
 
     if (!set_cookies) {
@@ -145,7 +145,7 @@ function getFormHash(error, response, body) {
 
 function decodeXml(error, response, body) {
     //查看是否登录过期或者没登录
-    var message = '签到出错，请查看日志';
+    let message = '签到出错，请查看日志';
     if (body.match('ÄúÐèÒªÏÈµÇÂ¼²ÅÄÜ¼ÌÐø±¾²Ù×÷')) {
         message = '未登录或者cookie失效，请重新获取cookie';
     }
