@@ -11,13 +11,13 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let cookie = $request.headers.Cookie;
 
-    const saltKey_regex = /(R5nb_c8f5_saltKey=\S*)/gm;
+    const saltkey_regex = /(R5nb_c8f5_saltkey=\S*)/gm;
     const auth_regex = /(R5nb_c8f5_auth=(\S*));/gm;
-    const R5nb_c8f5_saltKey = saltKey_regex.exec(cookie);
+    const R5nb_c8f5_saltkey = saltkey_regex.exec(cookie);
     const R5nb_c8f5_auth = auth_regex.exec(cookie);
 
-    if (!R5nb_c8f5_saltKey) {
-        $notification.post('', '', '获取R5nb_c8f5_saltKey失败');
+    if (!R5nb_c8f5_saltkey) {
+        $notification.post('', '', '获取R5nb_c8f5_saltkey失败');
         $done();
     }
 
@@ -26,10 +26,10 @@ if (isRequest) {
         $done();
     }
 
-    $persistentStore.write(R5nb_c8f5_saltKey[1], 'R5nb_c8f5_saltKey');
+    $persistentStore.write(R5nb_c8f5_saltkey[1], 'R5nb_c8f5_saltkey');
 
-    if (!$persistentStore.read('R5nb_c8f5_saltKey')) {
-        $notification.post('', '', '保存R5nb_c8f5_saltKey失败');
+    if (!$persistentStore.read('R5nb_c8f5_saltkey')) {
+        $notification.post('', '', '保存R5nb_c8f5_saltkey失败');
         $done();
     }
 
@@ -84,10 +84,10 @@ let $gabeX = gabeX();
 
 //cookie
 const R5nb_c8f5_auth = $persistentStore.read('R5nb_c8f5_auth');
-const saltKey = $persistentStore.read('R5nb_c8f5_saltKey');
+const saltkey = $persistentStore.read('R5nb_c8f5_saltkey');
 
-if (!saltKey) {
-    $gabeX.notify('', '', '读取R5nb_c8f5_saltKey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+if (!saltkey) {
+    $gabeX.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
 }
 
 if (!R5nb_c8f5_auth) {
@@ -97,7 +97,7 @@ if (!R5nb_c8f5_auth) {
 let options = {
     url: "http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign",
     headers: {
-        'Cookie': R5nb_c8f5_auth + ';' + saltKey,
+        'Cookie': R5nb_c8f5_auth + ';' + saltkey,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.64',
     },
     body: {}
