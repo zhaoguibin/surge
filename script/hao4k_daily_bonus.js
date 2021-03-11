@@ -62,13 +62,13 @@ function gabeX() {
     }
 }
 
-let $gabeX = gabeX();
+let gabe = gabeX();
 
 //cookie
 const Hao4K_cookie = $persistentStore.read('Hao4K_cookie');
 
 if (!Hao4K_cookie) {
-    $gabeX.notify('', '', '读取Hao4K_cookie失败，请先访问[https://www.hao4k.cn/plugin.php?id=k_misign:sign]获取');
+    gabe.notify('', '', '读取Hao4K_cookie失败，请先访问[https://www.hao4k.cn/plugin.php?id=k_misign:sign]获取');
 }
 
 let options = {
@@ -84,13 +84,13 @@ function getFormHash(error, response, body) {
     const regex = /<a\shref="member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">/gm;
     const formhash = regex.exec(body)[1];
     if (!formhash) {
-        $gabeX.notify('', '', '获取formhash失败');
+        gabe.notify('', '', '获取formhash失败');
     }
 
     options.url = 'https://www.hao4k.cn/plugin.php?id=k_misign:sign&operation=qiandao&format=empty&inajax=1&ajaxtarget=JD_sign&formhash=' + formhash;
 
-    $gabeX.get(options, function () {
-        $gabeX.get(options, decodeXml);
+    gabe.get(options, function () {
+        gabe.get(options, decodeXml);
     });
 }
 
@@ -101,9 +101,9 @@ function decodeXml(error, response, body) {
         message = '签到成功';
     }
 
-    $gabeX.notify('Hao4k签到提醒', '', message);
+    gabe.notify('Hao4k签到提醒', '', message);
 }
 
-$gabeX.get(options, getFormHash);
+gabe.get(options, getFormHash);
 
 $done();

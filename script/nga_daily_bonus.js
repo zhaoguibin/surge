@@ -89,16 +89,16 @@ function gabeX() {
     }
 }
 
-let $gabeX = gabeX();
+let gabe = gabeX();
 
 const NGA_access_uid = $persistentStore.read('NGA_access_uid');
 if (!NGA_access_uid) {
-    $gabeX.notify('', '', '读取NGA_access_uid失败，请手机浏览器登录https://bbs.nga.cn获取');
+    gabe.notify('', '', '读取NGA_access_uid失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
 const NGA_access_token = $persistentStore.read('NGA_access_token');
 if (!NGA_access_token) {
-    $gabeX.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
+    gabe.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
 let options = {
@@ -116,7 +116,7 @@ let options = {
         "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n"
 }
 
-$gabeX.post(options, decodeJson);
+gabe.post(options, decodeJson);
 
 function decodeJson(errors, response, body) {
     let data = JSON.parse(body);
@@ -130,7 +130,7 @@ function decodeJson(errors, response, body) {
         msg = data;
     }
 
-    $gabeX.notify('nga签到', '', msg);
+    gabe.notify('nga签到', '', msg);
     console.log(body);
 
     dailySilverCoins();
@@ -157,7 +157,7 @@ function dailySilverCoins() {
             "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n2\r\n"
     }
 
-    $gabeX.post(options, function (errors, response, body) {
+    gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
     });
 }
@@ -181,7 +181,7 @@ function dailyNCoins() {
             "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n30\r\n"
     }
 
-    $gabeX.post(options, function (errors, response, body) {
+    gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
     });
 }
@@ -205,7 +205,7 @@ function addUpDailyBonus() {
             "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n131\r\n"
     }
 
-    $gabeX.post(options, function (errors, response, body) {
+    gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
     });
 }

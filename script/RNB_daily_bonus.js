@@ -80,18 +80,18 @@ function gabeX() {
     }
 }
 
-let $gabeX = gabeX();
+let gabe = gabeX();
 
 //cookie
 const R5nb_c8f5_auth = $persistentStore.read('R5nb_c8f5_auth');
 const saltkey = $persistentStore.read('R5nb_c8f5_saltkey');
 
 if (!saltkey) {
-    $gabeX.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+    gabe.notify('', '', '读取R5nb_c8f5_saltkey失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
 }
 
 if (!R5nb_c8f5_auth) {
-    $gabeX.notify('', '', '读取R5nb_c8f5_auth失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
+    gabe.notify('', '', '读取R5nb_c8f5_auth失败，请先访问个人空间【http://www.mixrnb.com/space-uid-*.html】获取');
 }
 
 let options = {
@@ -108,13 +108,13 @@ function getSecuritySessionVerify(error, response, body) {
     set_cookies = set_cookie.split(";"); //字符分割
 
     if (!set_cookies) {
-        $gabeX.notify('', '', '获取SecuritySessionVerify失败');
+        gabe.notify('', '', '获取SecuritySessionVerify失败');
     }
 
     options.headers.Cookie += ';' + set_cookies[0];
     options.url += '&security_verify_data=313932302c31303830';
 
-    $gabeX.get(options, getSecuritySessionMidVerify);
+    gabe.get(options, getSecuritySessionMidVerify);
 }
 
 function getSecuritySessionMidVerify(error, response, body) {
@@ -122,25 +122,25 @@ function getSecuritySessionMidVerify(error, response, body) {
     set_cookies = set_cookie.split(";"); //字符分割
 
     if (!set_cookies) {
-        $gabeX.notify('', '', '获取SecuritySessionMidVerify失败');
+        gabe.notify('', '', '获取SecuritySessionMidVerify失败');
     }
 
     options.headers.Cookie += ';' + set_cookies[0];
 
-    $gabeX.get(options, getFormHash);
+    gabe.get(options, getFormHash);
 }
 
 function getFormHash(error, response, body) {
     const regex = /^<li><a\shref=\"member\.php\?mod=logging&amp;action=logout&amp;formhash=(\w*)\">.*<\/a><\/li>$/gmi;
     const formhash = regex.exec(body)[1];
     if (!formhash) {
-        $gabeX.notify('', '', '获取formhash失败');
+        gabe.notify('', '', '获取formhash失败');
     }
     options.url = 'http://www.mixrnb.com/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1';
     options.body = 'formhash=' + formhash + '&qdxq=kx'
     options['headers']['Content-Type'] = 'application/x-www-form-urlencoded'
 
-    $gabeX.post(options, decodeXml);
+    gabe.post(options, decodeXml);
 }
 
 function decodeXml(error, response, body) {
@@ -158,10 +158,10 @@ function decodeXml(error, response, body) {
         message = '您今日已经签到，请明天再来！';
     }
 
-    $gabeX.notify('mixRnb签到提醒', '', message);
+    gabe.notify('mixRnb签到提醒', '', message);
 
 }
 
-$gabeX.get(options, getSecuritySessionVerify);
+gabe.get(options, getSecuritySessionVerify);
 
 $done();
