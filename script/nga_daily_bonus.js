@@ -119,9 +119,6 @@ let options = {
 //刮墙
 function checkIn() {
     gabe.post(options, decodeJson);
-    dailySilverCoins();
-    dailyNCoins();
-    addUpDailyBonus();
 }
 
 //每日签到得银币
@@ -187,6 +184,10 @@ function decodeJson(errors, response, body) {
 
     gabe.notify('nga签到', '', msg);
     console.log(body);
+
+    dailySilverCoins();
+    dailyNCoins();
+    addUpDailyBonus();
 }
 
 checkIn();
