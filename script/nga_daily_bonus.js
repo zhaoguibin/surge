@@ -116,23 +116,9 @@ let options = {
         "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n"
 }
 
-gabe.post(options, decodeJson);
-
-function decodeJson(errors, response, body) {
-    let data = JSON.parse(body);
-    let msg = '';
-
-    if (data.data) {
-        msg = data.data[0];
-    } else if (data.error) {
-        msg = data.error[0];
-    } else {
-        msg = data;
-    }
-
-    gabe.notify('nga签到', '', msg);
-    console.log(body);
-
+//刮墙
+function checkIn() {
+    gabe.post(options, decodeJson);
     dailySilverCoins();
     dailyNCoins();
     addUpDailyBonus();
@@ -185,5 +171,24 @@ function addUpDailyBonus() {
         console.log(JSON.parse(body))
     });
 }
+
+//解析消息
+function decodeJson(errors, response, body) {
+    let data = JSON.parse(body);
+    let msg = '';
+
+    if (data.data) {
+        msg = data.data[0];
+    } else if (data.error) {
+        msg = data.error[0];
+    } else {
+        msg = data;
+    }
+
+    gabe.notify('nga签到', '', msg);
+    console.log(body);
+}
+
+checkIn();
 
 $done();
