@@ -100,57 +100,37 @@ if (!NGA_access_token) {
     gabe.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
-let boundary = "----WebKitFormBoundaryAgjAve4UZAXpjupu";
-
-function bodyData(body) {
-    let body_str = '';
-    let index;
-
-    for (index in body) {
-        body_str += boundary + "\r\nContent-Disposition: form-data; name=\"" + index + "\"\r\n\r\n" + body[index] + "\r\n";
-    }
-    return body_str;
-}
-
 let options = {
     url: "https://ngabbs.com/nuke.php",
     headers: {
         'Host': 'ngabbs.com',
-        'Content-Type': 'multipart/form-data; boundary=' + boundary,
+        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryAgjAve4UZAXpjupu',
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NGA_skull/7.1.8',
     },
-    body: ""
+    body: "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__lib\"\r\n\r\ncheck_in\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__output\"\r\n\r\n11\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"app_id\"\r\n\r\n1001\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__act\"\r\n\r\ncheck_in\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_uid\"\r\n\r\n" + NGA_access_uid + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n"
 }
 
 //刮墙
 function checkIn() {
-    let body = {
-        __lib: "check_in",
-        __output: "11",
-        app_id: "1001",
-        __act: "check_in",
-        access_uid: NGA_access_uid,
-        access_token: NGA_access_token
-    };
-
-    options.body = bodyData(body);
     gabe.post(options, decodeJson);
 }
 
 //每日签到得银币
 function dailySilverCoins() {
-    let body = {
-        __lib: "mission",
-        __output: "11",
-        app_id: "1001",
-        __act: "checkin_count_add",
-        access_uid: NGA_access_uid,
-        access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 2
-    };
+    options.body = "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__lib\"\r\n\r\nmission\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__output\"\r\n\r\n11\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"app_id\"\r\n\r\n1001\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__act\"\r\n\r\ncheckin_count_add\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_uid\"\r\n\r\n" + NGA_access_uid + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"no_compatible_fix\"\r\n\r\n1\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n2\r\n";
 
-    options.body = bodyData(body);
     gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
     });
@@ -158,17 +138,14 @@ function dailySilverCoins() {
 
 //每日签到得N币
 function dailyNCoins() {
-    let body = {
-        __lib: "mission",
-        __output: "11",
-        app_id: "1001",
-        __act: "checkin_count_add",
-        access_uid: NGA_access_uid,
-        access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 30
-    };
-    options.body = bodyData(body);
+    options.body = "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__lib\"\r\n\r\nmission\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__output\"\r\n\r\n11\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"app_id\"\r\n\r\n1001\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__act\"\r\n\r\ncheckin_count_add\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_uid\"\r\n\r\n" + NGA_access_uid + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"no_compatible_fix\"\r\n\r\n1\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n30\r\n";
 
     gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
@@ -177,17 +154,14 @@ function dailyNCoins() {
 
 //累计签到365天
 function addUpDailyBonus() {
-    let body = {
-        __lib: "mission",
-        __output: "11",
-        app_id: "1001",
-        __act: "checkin_count_add",
-        access_uid: NGA_access_uid,
-        access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 131
-    };
-    options.body = bodyData(body);
+    options.body = "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__lib\"\r\n\r\nmission\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__output\"\r\n\r\n11\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"app_id\"\r\n\r\n1001\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"__act\"\r\n\r\ncheckin_count_add\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_uid\"\r\n\r\n" + NGA_access_uid + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"access_token\"\r\n\r\n" + NGA_access_token + "\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"no_compatible_fix\"\r\n\r\n1\r\n" +
+        "------WebKitFormBoundaryAgjAve4UZAXpjupu\r\nContent-Disposition: form-data; name=\"mid\"\r\n\r\n131\r\n";
 
     gabe.post(options, function (errors, response, body) {
         console.log(JSON.parse(body))
