@@ -100,14 +100,14 @@ if (!NGA_access_token) {
     gabe.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
 }
 
-let boundary = "----WebKitFormBoundaryAgjAve4UZAXpjupu";
+let boundary = "WebKitFormBoundaryAgjAve4UZAXpjupu";
 
 function bodyData(body) {
     let body_str = '';
     let index;
 
     for (index in body) {
-        body_str += boundary + "\r\nContent-Disposition: form-data; name=\"" + index + "\"\r\n\r\n" + body[index] + "\r\n";
+        body_str += "------"+boundary + "\r\nContent-Disposition: form-data; name=\"" + index + "\"\r\n\r\n" + body[index] + "\r\n";
     }
     return body_str;
 }
@@ -116,7 +116,7 @@ let options = {
     url: "https://ngabbs.com/nuke.php",
     headers: {
         'Host': 'ngabbs.com',
-        'Content-Type': 'multipart/form-data; boundary=' + boundary,
+        'Content-Type': 'multipart/form-data; boundary=----' + boundary,
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NGA_skull/7.1.8',
     },
     body: ""
