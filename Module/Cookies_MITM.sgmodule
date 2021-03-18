@@ -2,4 +2,4 @@
 #!desc= 签到用到的hostname
 
 [MITM]
-hostname = %APPEND% *.bilibili.com,*.acfun.cn,tieba.baidu.com,music.163.com,*.v2ex.com,bbs.nga.cn,www.52pojie.cn,ifac*.iqiyi.com
+hostname = %APPEND% api.m.jd.com,*.bilibili.com,*.acfun.cn,tieba.baidu.com,music.163.com,*.v2ex.com,bbs.nga.cn,www.52pojie.cn,ifac*.iqiyi.com
