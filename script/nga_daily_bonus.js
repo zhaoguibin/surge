@@ -53,7 +53,7 @@ if (isRequest) {
 
 
 // Modified from yichahucha
-function gabeX(){const get=(options,callback)=>{$httpClient.get(options,(error,response,body)=>{callback(error,response,body)})};const post=(options,callback)=>{$httpClient.post(options,(error,response,body)=>{callback(error,response,body)})};const write=(value,key)=>{return $persistentStore.write(value,key)};const read=(key)=>{return $persistentStore.read(key)};const notify=(title,subtitle,message)=>{$notification.post(title,subtitle,message)$done()};return{get,post,write,read,notify}}
+function gabeX(){const get=(options,callback)=>{$httpClient.get(options,(error,response,body)=>{callback(error,response,body)})};const post=(options,callback)=>{$httpClient.post(options,(error,response,body)=>{callback(error,response,body)})};const write=(value,key)=>{return $persistentStore.write(value,key)};const read=(key)=>{return $persistentStore.read(key)};const notify=(title,subtitle,message)=>{$notification.post(title,subtitle,message);$done()};return{get,post,write,read,notify}}
 
 let gabe = gabeX();
 
