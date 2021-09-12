@@ -53,7 +53,7 @@ if (isRequest) {
 
 
 // Modified from yichahucha
-function gabeX(){const get=(options,callback)=>{$httpClient.get(options,(error,response,body)=>{callback(error,response,body)})};const post=(options,callback)=>{$httpClient.post(options,(error,response,body)=>{callback(error,response,body)})};const write=(value,key)=>{return $persistentStore.write(value,key)};const read=(key)=>{return $persistentStore.read(key)};const notify=(title,subtitle,message)=>{$notification.post(title,subtitle,message);$done()};return{get,post,write,read,notify}}
+function gabeX() { const get = (options, callback) => { $httpClient.get(options, (error, response, body) => { callback(error, response, body) }) }; const post = (options, callback) => { $httpClient.post(options, (error, response, body) => { callback(error, response, body) }) }; const write = (value, key) => { return $persistentStore.write(value, key) }; const read = (key) => { return $persistentStore.read(key) }; const notify = (title, subtitle, message) => { $notification.post(title, subtitle, message); $done() }; return { get, post, write, read, notify } }
 
 let gabe = gabeX();
 
@@ -74,7 +74,7 @@ function bodyData(body) {
     let index;
 
     for (index in body) {
-        body_str += "------"+boundary + "\r\nContent-Disposition: form-data; name=\"" + index + "\"\r\n\r\n" + body[index] + "\r\n";
+        body_str += "------" + boundary + "\r\nContent-Disposition: form-data; name=\"" + index + "\"\r\n\r\n" + body[index] + "\r\n";
     }
     return body_str;
 }
@@ -97,7 +97,9 @@ function checkIn() {
         app_id: "1001",
         __act: "check_in",
         access_uid: NGA_access_uid,
-        access_token: NGA_access_token
+        access_token: NGA_access_token,
+        __ngaClientChecksum: 'e59454ce899e30f1564b9b3563ddf4b01631408368',
+        __inchst: "UTF-8"
     };
 
     options.body = bodyData(body);
@@ -105,23 +107,24 @@ function checkIn() {
 }
 
 //每日签到得银币
-function dailySilverCoins() {
-    let body = {
-        __lib: "mission",
-        __output: "11",
-        app_id: "1001",
-        __act: "checkin_count_add",
-        access_uid: NGA_access_uid,
-        access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 2
-    };
+// function dailySilverCoins() {
+//     let body = {
+//         __lib: "mission",
+//         __output: "11",
+//         app_id: "1001",
+//         __act: "checkin_count_add",
+//         __inchst: "UTF-8",
+//         access_uid: NGA_access_uid,
+//         access_token: NGA_access_token,
+//         no_compatible_fix: 1,
+//         mid: 2
+//     };
 
-    options.body = bodyData(body);
-    gabe.post(options, function (errors, response, body) {
-        console.log(JSON.parse(body))
-    });
-}
+//     options.body = bodyData(body);
+//     gabe.post(options, function (errors, response, body) {
+//         console.log(JSON.parse(body))
+//     });
+// }
 
 //每日签到得N币
 function dailyNCoins() {
@@ -130,10 +133,13 @@ function dailyNCoins() {
         __output: "11",
         app_id: "1001",
         __act: "checkin_count_add",
+        no_compatible_fix: 1,
+        mid: 30,
         access_uid: NGA_access_uid,
         access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 30
+        __ngaClientChecksum: 'e59454ce899e30f1564b9b3563ddf4b01631408368',
+        __inchst: "UTF-8"
+
     };
     options.body = bodyData(body);
 
@@ -149,10 +155,12 @@ function addUpDailyBonus() {
         __output: "11",
         app_id: "1001",
         __act: "checkin_count_add",
+        no_compatible_fix: 1,
+        mid: 131,
         access_uid: NGA_access_uid,
         access_token: NGA_access_token,
-        no_compatible_fix: 1,
-        mid: 131
+        __ngaClientChecksum: 'e93c4fcbaec989caac222bcf03ca5c101631408369',
+        __inchst: "UTF-8"
     };
     options.body = bodyData(body);
 
@@ -177,7 +185,7 @@ function decodeJson(errors, response, body) {
     gabe.notify('nga签到', '', msg);
     console.log(body);
 
-    dailySilverCoins();
+    // dailySilverCoins();
     dailyNCoins();
     addUpDailyBonus();
 }
