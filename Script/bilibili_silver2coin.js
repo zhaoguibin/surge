@@ -12,7 +12,7 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let cookie = $request.headers.Cookie;
     if (!cookie) {
-        $notification.post('', '', '获取bilibili_cookie失败');
+        $notification.post('', '', '【银瓜子换硬币】获取bilibili_cookie失败');
         $done();
     }
 
@@ -22,23 +22,23 @@ if (isRequest) {
     bili_jct = bili_jct_reg.exec(cookie)[1];
 
     if (!bili_jct) {
-        $notification.post('', '', '获取bili_jct失败');
+        $notification.post('', '', '【银瓜子换硬币】获取bili_jct失败');
         $done();
     }
 
     $persistentStore.write(bili_jct, 'bilibili_bili_jct');
     if (!$persistentStore.read('bilibili_bili_jct')) {
-        $notification.post('', '', '保存【bilibili_bili_jct】失败');
+        $notification.post('', '', '【银瓜子换硬币】保存【bilibili_bili_jct】失败');
         $done();
     }
 
     $persistentStore.write(cookie, 'bilibili_cookie');
     if (!$persistentStore.read('bilibili_cookie')) {
-        $notification.post('', '', '保存【bilibili_cookie】失败');
+        $notification.post('', '', '【银瓜子换硬币】保存【bilibili_cookie】失败');
         $done();
     }
 
-    $notification.post('', '', '获取cookie成功，请禁用此脚本');
+    $notification.post('', '', '【银瓜子换硬币】获取【bilibili_cookie】成功，请禁用此脚本');
     $done();
 }
 
@@ -72,12 +72,12 @@ let gabe = gabeX();
 
 const bilibili_bili_jct = $persistentStore.read('bilibili_bili_jct');
 if (!bilibili_bili_jct) {
-    gabe.notify('', '', '读取【bilibili_bili_jct】失败，请手机浏览器登录【http://m.bilibili.com/space】获取');
+    gabe.notify('', '银瓜子换硬币', '读取【bilibili_bili_jct】失败，请手机浏览器登录【http://m.bilibili.com/space】获取');
 }
 
 const bilibili_cookie = $persistentStore.read('bilibili_cookie');
 if (!bilibili_cookie) {
-    gabe.notify('', '', '读取【bilibili_cookie】失败，请手机浏览器登录【http://m.bilibili.com/space】获取');
+    gabe.notify('', '银瓜子换硬币', '读取【bilibili_cookie】失败，请手机浏览器登录【http://m.bilibili.com/space】获取');
 }
 
 let options = {
@@ -107,7 +107,7 @@ function decodeJson(errors, response, body) {
         msg = data.message;
     }
 
-    gabe.notify('哔哩哔哩银瓜子换硬币', '', msg);
+    gabe.notify('哔哩哔哩银瓜子换硬币', '银瓜子换硬币', msg);
     console.log(body);
 }
 
