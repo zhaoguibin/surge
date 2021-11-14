@@ -13,3 +13,5 @@
 获取nga的cookie = type=http-request,pattern= https:\/\/bbs\.nga\.cn,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_daily_bonus.js,script-update-interval=0
 吾爱获取Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
 爱奇艺获取Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+zgb获取哔哩哔哩的cookie = type=http-request,pattern= http:\/\/m\.bilibili\.com\/space,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/bilibili_silver2coin.js
+

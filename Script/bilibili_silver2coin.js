@@ -1,8 +1,8 @@
 /*************
  [Script]
- 哔哩哔哩银瓜子换硬币.js = type=cron,cronexp=11 6 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/nga_daily_bonus.js
+ 哔哩哔哩银瓜子换硬币.js = type=cron,cronexp=11 6 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/bilibili_silver2coin.js
 
- 获取哔哩哔哩的cookie = type=http-request,pattern= http:\/\/m\.bilibili\.com\/space,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/nga_daily_bonus.js,script-update-interval=0
+ 获取哔哩哔哩的cookie = type=http-request,pattern= http:\/\/m\.bilibili\.com\/space,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/bilibili_silver2coin.js
  手机浏览器登录哔哩哔哩之后到【http://m.bilibili.com/space】获取cookie
 
  [MITM]
