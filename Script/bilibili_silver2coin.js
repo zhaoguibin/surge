@@ -83,6 +83,7 @@ if (!bilibili_cookie) {
 let options = {
     url: "https://api.live.bilibili.com/xlive/revenue/v1/wallet/silver2coin",
     headers: {
+        'Cookie': bilibili_cookie,
         'Host': 'api.live.bilibili.com',
         'Content-Type': 'application/x-www-form-urlencoded',
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NGA_skull/7.1.8',
