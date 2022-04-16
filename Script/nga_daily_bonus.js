@@ -190,6 +190,84 @@ function decodeJson(errors, response, body) {
     addUpDailyBonus();
 }
 
+//每天分享帖子三次
+const sharePost = function () {
+    let share_options = {
+        url: "https://ngabbs.com/nuke.php?__lib=data_query&__act=topic_share_log_v2",
+        headers: {
+            'Host': 'ngabbs.com',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 NGA_skull/7.1.8',
+        },
+        body: "__output=12&access_token=" + NGA_access_token + "&access_uid=" + NGA_access_uid + "&app_id=1001&event=2&tid=31470825"
+    }
+    gabe.post(share_options, function (errors, response, body) {
+        gabe.notify('nga分享帖子', '', 'nga分享帖子');
+    });
+}
+
+//分享帖子之后获取N币
+const sharePostGetCoin = function () {
+    let body = {
+        __lib: "mission",
+        __output: "11",
+        app_id: "1001",
+        __act: "check_mission",
+        mid: "149",
+        get_success_repeat: "1",
+        no_compatible_fix: "1",
+        access_uid: NGA_access_uid,
+        access_token: NGA_access_token,
+        __inchst: "UTF-8"
+    };
+
+    options.body = bodyData(body);
+    gabe.post(options, function (errors, response, body) {
+        let data = JSON.parse(body);
+        if (data.data[0][2][149]) {
+            gabe.notify('分享帖子获取N币', '', data.data[0][2][149]);
+        } else {
+            gabe.notify('分享帖子获取N币', '', '分享帖子获取N币失败');
+        }
+    });
+}
+
+//看广告获取N币
+const viewAdGetCoin = function () {
+    let body = {
+        __lib: "mission",
+        __output: "11",
+        app_id: "1001",
+        __act: "video_view_task_counter_add_v2",
+        get_success_repeat: "1",
+        no_compatible_fix: "1",
+        access_uid: NGA_access_uid,
+        access_token: NGA_access_token,
+        __inchst: "UTF-8"
+    };
+
+    options.body = bodyData(body);
+    gabe.post(options, function (errors, response, body) {
+        gabe.notify('观看广告获取N币', '', '观看广告获取N币');
+    });
+}
+
+//分享帖子&&观看广告
+async function sharePostAndViewAd() {
+    //分享帖子
+    await sharePost();
+    await sharePost();
+    await sharePost();
+    await sharePostGetCoin();
+    //查看广告
+    await viewAdGetCoin();
+    await viewAdGetCoin();
+    await viewAdGetCoin();
+    await viewAdGetCoin();
+
+}
+
 checkIn();
+sharePostAndViewAd();
 
 $done();
