@@ -202,7 +202,7 @@ const sharePost = function () {
         body: "__output=12&access_token=" + NGA_access_token + "&access_uid=" + NGA_access_uid + "&app_id=1001&event=2&tid=31470825"
     }
     gabe.post(share_options, function (errors, response, body) {
-        gabe.notify('nga分享帖子', '', 'nga分享帖子');
+        return 'nga分享帖子';
     });
 }
 
@@ -225,9 +225,9 @@ const sharePostGetCoin = function () {
     gabe.post(options, function (errors, response, body) {
         let data = JSON.parse(body);
         if (data.data[0][2][149]) {
-            gabe.notify('分享帖子获取N币', '', data.data[0][2][149]);
+            return data.data[0][2][149];
         } else {
-            gabe.notify('分享帖子获取N币', '', '分享帖子获取N币失败');
+            return '分享帖子获取N币失败';
         }
     });
 }
@@ -248,22 +248,25 @@ const viewAdGetCoin = function () {
 
     options.body = bodyData(body);
     gabe.post(options, function (errors, response, body) {
-        gabe.notify('观看广告获取N币', '', '观看广告获取N币');
+        return '观看广告获取N币';
     });
 }
 
 //分享帖子&&观看广告
 async function sharePostAndViewAd() {
     //分享帖子
-    await sharePost();
-    await sharePost();
-    await sharePost();
-    await sharePostGetCoin();
+    const share_first = await sharePost();
+    const share_second = await sharePost();
+    const share_third = await sharePost();
+    const share_get_coin = await sharePostGetCoin();
     //查看广告
-    await viewAdGetCoin();
-    await viewAdGetCoin();
-    await viewAdGetCoin();
-    await viewAdGetCoin();
+    const view_ad_first = await viewAdGetCoin();
+    const view_ad_second = await viewAdGetCoin();
+    const view_ad_third = await viewAdGetCoin();
+    const view_ad_fourth = await viewAdGetCoin();
+
+    let msg = '第一次分享：' + share_first + "\r\n" + '第二次分享：' + share_second + "\r\n" + '第三次分享：' + share_third + "\r\n" + '分享结果：' + share_get_coin + "\r\n"
+        + "第一次看广告：" + view_ad_first + "\r\n" + "第二次看广告：" + view_ad_second + "\r\n" + "第三次看广告：" + view_ad_third + "\r\n" + "第四次看广告：" + view_ad_fourth + "\r\n";
 
 }
 
