@@ -202,11 +202,11 @@ const sharePost = function () {
         body: "__output=12&access_token=" + NGA_access_token + "&access_uid=" + NGA_access_uid + "&app_id=1001&event=2&tid=31470825"
     }
 
-    let msg = '';
-    gabe.post(share_options, function (errors, response, body) {
-        msg = 'nga分享帖子';
+    return new Promise(function (resolve, reject) {
+        gabe.post(share_options, function (errors, response, body) {
+            resolve('nga分享帖子');
+        });
     });
-    return msg;
 }
 
 //分享帖子之后获取N币
@@ -224,17 +224,21 @@ const sharePostGetCoin = function () {
         __inchst: "UTF-8"
     };
 
-    let msg = '';
     options.body = bodyData(body);
-    gabe.post(options, function (errors, response, body) {
-        let data = JSON.parse(body);
-        if (data.data[0][2][149]) {
-            msg = data.data[0][2][149];
-        } else {
-            msg = '分享帖子获取N币失败';
-        }
+
+    return new Promise(function (resolve, reject) {
+        gabe.post(options, function (errors, response, body) {
+            let msg = '';
+            let data = JSON.parse(body);
+            if (data.data[0][2][149]) {
+                msg = data.data[0][2][149];
+            } else {
+                msg = '分享帖子获取N币失败';
+            }
+            resolve(msg);
+        });
+
     });
-    return msg;
 }
 
 //看广告获取N币
@@ -251,12 +255,13 @@ const viewAdGetCoin = function () {
         __inchst: "UTF-8"
     };
 
-    let msg = '';
     options.body = bodyData(body);
-    gabe.post(options, function (errors, response, body) {
-        msg = '观看广告获取N币';
+
+    return new Promise(function (resolve, reject) {
+        gabe.post(options, function (errors, response, body) {
+            resolve('观看广告获取N币');
+        });
     });
-    return msg;
 }
 
 //分享帖子&&观看广告
