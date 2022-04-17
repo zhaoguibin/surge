@@ -267,7 +267,7 @@ async function sharePostAndViewAd() {
 
     let msg = '第一次分享：' + share_first + "\r\n" + '第二次分享：' + share_second + "\r\n" + '第三次分享：' + share_third + "\r\n" + '分享结果：' + share_get_coin + "\r\n"
         + "第一次看广告：" + view_ad_first + "\r\n" + "第二次看广告：" + view_ad_second + "\r\n" + "第三次看广告：" + view_ad_third + "\r\n" + "第四次看广告：" + view_ad_fourth + "\r\n";
-
+    gabe.notify('nga分享帖子&&观看广告', '', msg);
 }
 
 checkIn();
