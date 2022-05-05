@@ -1,7 +1,6 @@
 /*************
  [Script]
 nga分享帖子&&查看广告1 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_share_ad.js,script-update-interval=0
-nga分享帖子&&查看广告2 = type=cron,cronexp=10 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_share_ad.js,script-update-interval=0
 
  获取nga的cookie = type=http-request,pattern= https:\/\/bbs\.nga\.cn,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/nga_share_ad.js,script-update-interval=0
  手机浏览器登录nga之后到【https://bbs.nga.cn】获取cookie
