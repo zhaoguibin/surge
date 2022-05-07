@@ -101,7 +101,7 @@ const sharePost = function () {
         body: "__output=12&access_token=" + NGA_access_token + "&access_uid=" + NGA_access_uid + "&app_id=1001&event=2&tid=31470825"
     }
 
-    return new Promise(resolve => {
+    return new Promise(function (resolve, reject) {
         gabe.post(share_options, function (errors, response, body) {
             resolve('nga分享帖子');
         });
@@ -125,7 +125,7 @@ const sharePostGetCoin = function () {
 
     options.body = bodyData(body);
 
-    return new Promise(resolve => {
+    return new Promise(function (resolve, reject) {
         gabe.post(options, function (errors, response, body) {
             let msg = '';
             let data = JSON.parse(body);
@@ -156,7 +156,7 @@ const viewAdGetCoin = function () {
 
     options.body = bodyData(body);
 
-    return new Promise(resolve => {
+    return new Promise(function (resolve, reject) {
         gabe.post(options, function (errors, response, body) {
             resolve('观看广告获取N币');
         });
