@@ -3,7 +3,7 @@
 acfun签到 = type=cron,cronexp=11 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/acfun_signIn.js,script-update-interval=0
 
  获取acfun的cookie = type=http-request,pattern= .+\.acfun\.cn\/rest\/app\/user\/personalInfo.+,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/acfun_signIn.js,script-update-interval=0
- 手机app签到一次，获取签到所需要的cookie和其他配置信息
+ 手机app到【我的】页面，获取签到所需要的用户信息
 
  [MITM]
  hostname = *acfun.cn
