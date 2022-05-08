@@ -2,19 +2,17 @@
 #!desc=签到获取cookie
 
 [MITM]
-hostname = %APPEND% api.m.jd.com,*.bilibili.com,*.acfun.cn,tieba.baidu.com,music.163.com,*.v2ex.com,bbs.nga.cn,www.52pojie.cn,ifac*.iqiyi.com,*.hao4k.cn
+hostname = %APPEND% api.m.jd.com,*.bilibili.com,*.acfun.cn,tieba.baidu.com,music.163.com,*.v2ex.com,bbs.nga.cn,www.52pojie.cn,*.hao4k.cn
 
 [Script]
 获取mixRnb的cookie = type=http-request,pattern=http:\/\/www.mixrnb.com\/plugin\.php\?id=dsu_paulsign:sign,tag=获取mixRnb的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/RNB_daily_bonus.js,script-update-interval=0
 获取京东Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 获取哔哩哔哩Cookie = type=http-request, pattern=^https:\/\/(www|live)\.bilibili\.com\/?.?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js
-获取AcfunCookie = type = http-request, pattern=^https:\/\/api\-new\.app\.acfun\.cn\/rest\/app\/user\/personalInfo, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/acfun/acfun.cookie.js
+获取acfun的cookie = type=http-request,pattern= .+\.acfun\.cn\/rest\/app\/user\/signIn.+,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/acfun_signIn.js,script-update-interval=0
 获取贴吧Cookie = type = http-request, pattern=^https?:\/\/tieba\.baidu\.com\/?.?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.cookie.js
 获取网易云音乐Cookie = type = http-request, pattern=^https:\/\/music.163.com\/weapi\/user\/level, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/neteasemusic.cookie.js,requires-body=true
 获取hao4k的cookie = type=http-request,pattern=https:\/\/www.hao4k.cn\/plugin\.php\?id=k_misign:sign,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/hao4k_daily_bonus.js,script-update-interval=0
 获取V2excookie = type= http-request, pattern=^https:\/\/www\.v2ex\.com\/mission\/daily, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js
 获取nga的cookie = type=http-request,pattern= https:\/\/bbs\.nga\.cn,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_daily_bonus.js,script-update-interval=0
-吾爱获取Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
-爱奇艺获取Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 zgb获取哔哩哔哩的cookie = type=http-request,pattern= http:\/\/m\.bilibili\.com\/space,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/bilibili_silver2coin.js
 

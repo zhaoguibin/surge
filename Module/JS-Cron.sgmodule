@@ -12,3 +12,4 @@ hao4k签到.js = type=cron,cronexp=9 6 * * *,timeout=60,script-path=https://raw.
 v2ex签到 = type=cron,cronexp=3 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.js,script-update-interval=0
 nga签到 = type=cron,cronexp=13 6 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_daily_bonus.js,script-update-interval=0
 nga分享帖子&&查看广告 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_share_ad.js,script-update-interval=0
+acfun签到 = type=cron,cronexp=11 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/acfun_signIn.js,script-update-interval=0

@@ -60,11 +60,13 @@ let gabe = gabeX();
 const NGA_access_uid = $persistentStore.read('NGA_access_uid');
 if (!NGA_access_uid) {
     gabe.notify('', '', '读取NGA_access_uid失败，请手机浏览器登录https://bbs.nga.cn获取');
+    $done();
 }
 
 const NGA_access_token = $persistentStore.read('NGA_access_token');
 if (!NGA_access_token) {
     gabe.notify('', '', '读取NGA_access_token失败，请手机浏览器登录https://bbs.nga.cn获取');
+    $done();
 }
 
 let boundary = "WebKitFormBoundaryAgjAve4UZAXpjupu";
