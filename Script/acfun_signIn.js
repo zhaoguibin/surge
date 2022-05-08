@@ -112,7 +112,7 @@ function signIn() {
             if (data.error_msg) {
                 msg = data.error_msg;
             } else {
-                if (data.result === '105002') {
+                if (data.result === 105002) {
                     msg = '签到时间间隔太短，请稍后重试';
                 } else {
                     msg = 'ACFUN签到失败，状态码：' + data.result;
