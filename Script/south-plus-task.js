@@ -1,4 +1,14 @@
+/*************
+ [Script]
+ south-plus任务 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_share_ad.js,script-update-interval=0
 
+ 获取cookie
+ south-plus-cookie = type=http-response,pattern=https:\/\/south\-plus\.net\/u\.php,requires-body=1,max-size=0,debug=0,script-path=south-plus-cookie.js
+ 手机浏览器登录https://south-plus.net之后到【https://south-plus.net/u.php】获取cookie
+
+ [MITM]
+ hostname = south-plus.net
+ **************/
 
 
 
