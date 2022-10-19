@@ -1,15 +1,47 @@
 /*************
  [Script]
- south-plus任务 = type=cron,cronexp=5 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/nga_share_ad.js,script-update-interval=0
+ south-plus任务 = type=cron,cronexp=12 8 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/south-plus-task.js,script-update-interval=0
 
  获取cookie
- south-plus-cookie = type=http-response,pattern=https:\/\/south\-plus\.net\/u\.php,requires-body=1,max-size=0,debug=0,script-path=south-plus-cookie.js
+ south-plus-cookie = type=http-response,pattern=https:\/\/south\-plus\.net\/u\.php,requires-body=1,max-size=0,debug=0,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/south-plus-task.js
  手机浏览器登录https://south-plus.net之后到【https://south-plus.net/u.php】获取cookie
 
  [MITM]
  hostname = south-plus.net
  **************/
 
+const isRequest = typeof $request != "undefined"
+if (isRequest) {
+    let cookie = $request.headers.Cookie;
+    if (!cookie) {
+        $notification.post('', '', '获取[south-plus]cookie失败');
+        $done();
+    }
+
+    let body = $response.body;
+    const verifyhash_regex = /verifyhash = '(\w+)';/gm;
+    const verifyhash = verifyhash_regex.exec(body);
+
+    if (!verifyhash[1]) {
+        $notification.post('', '', '获取[south-plus]verifyhash失败');
+        $done();
+    }
+
+    $persistentStore.write(cookie, 'south_plus_cookie');
+    if (!$persistentStore.read('south_plus_cookie')) {
+        $notification.post('', '', '保存【south_plus_cookie】失败');
+        $done();
+    }
+
+    $persistentStore.write(verifyhash[1], 'south_plus_verifyhash');
+    if (!$persistentStore.read('south_plus_verifyhash')) {
+        $notification.post('', '', '保存【south_plus_verifyhash】失败');
+        $done();
+    }
+
+    $notification.post('', '', '获取cookie成功，请禁用此脚本');
+    $done();
+}
 
 
 // Modified from yichahucha
