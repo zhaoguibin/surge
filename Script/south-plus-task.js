@@ -82,7 +82,8 @@ if (!verifyhash) {
 }
 
 //毫秒时间戳
-let times = Date.now();
+const times = Date.now();
+const week = new Date().getDay();
 
 let headers = {
     ':method': 'GET',
@@ -97,7 +98,7 @@ let headers = {
 };
 
 //领取每日任务
-const job = function () {
+const dailyJob = function () {
     let options = {
         url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job&cid=15&nowtime=" + times + "&verify=" + verifyhash,
         headers: headers,
@@ -112,7 +113,7 @@ const job = function () {
 }
 
 //完成每日任务
-const job2 = function () {
+const dailyJob2 = function () {
     let options = {
         url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job2&cid=15&nowtime=" + times + "&verify=" + verifyhash,
         headers: headers,
@@ -125,11 +126,55 @@ const job2 = function () {
     });
 }
 
-async function dailyTask() {
-    const job_msg = await job();
-    const job2_msg = await job2();
+//领取每周任务
+const weekJob = function () {
+    let options = {
+        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job&cid=14&nowtime=" + times + "&verify=" + verifyhash,
+        headers: headers,
+    }
 
-    let msg = '领取每日任务：' + job_msg + "\r\n" + '完成每日任务：' + job2_msg + "\r\n";
+    if(week !== 1){
+        return new Promise(function (resolve, reject) {
+            resolve('不是周一，不用做每周任务');
+        });
+    }
+
+    return new Promise(function (resolve, reject) {
+        gabe.get(options, function (errors, response, body) {
+            resolve(body);
+        });
+    });
+
+}
+
+//完成每周任务
+const weekJob2 = function () {
+    let options = {
+        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job2&cid=14&nowtime=" + times + "&verify=" + verifyhash,
+        headers: headers,
+    }
+
+    if(week !== 1){
+        return new Promise(function (resolve, reject) {
+            resolve('不是周一，不用做每周任务');
+        });
+    }
+
+    return new Promise(function (resolve, reject) {
+        gabe.get(options, function (errors, response, body) {
+            resolve(body);
+        });
+    });
+}
+
+async function dailyTask() {
+    const daily_job_msg = await dailyJob();
+    const daily_job2_msg = await dailyJob2();
+    const week_job_msg = await weekJob();
+    const week_job2_msg = await weekJob2();
+
+    let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n"+ '领取每周任务：'
+        + week_job_msg + "\r\n"+ '完成每周任务：' + week_job2_msg;
     gabe.notify('south-plus每日任务', '', msg);
 }
 
