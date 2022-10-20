@@ -81,9 +81,6 @@ if (!verifyhash) {
     gabe.notify('', '', '读取【south_plus_verifyhash】失败，请手机浏览器登录【https://south-plus.net/u.php】获取');
 }
 
-//毫秒时间戳
-const times = Date.now();
-const week = new Date().getDay();
 
 let headers = {
     ':method': 'GET',
@@ -97,11 +94,17 @@ let headers = {
     'cookie': cookie
 };
 
+//毫秒时间戳
+const times = Date.now();
+const week = new Date().getDay();
+const week_cid = 14;//每周任务标识
+const daily_cid = 15;//每日任务标识
+const base_url = "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&nowtime=" + times + "&verify=" + verifyhash;
+
 //领取每日任务
 const dailyJob = function () {
     let options = {
-        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job&cid=15&nowtime=" + times + "&verify=" + verifyhash,
-        headers: headers,
+        url: base_url + "&actions=job&cid=" + daily_cid, headers: headers,
     }
 
     return new Promise(function (resolve, reject) {
@@ -115,8 +118,7 @@ const dailyJob = function () {
 //完成每日任务
 const dailyJob2 = function () {
     let options = {
-        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job2&cid=15&nowtime=" + times + "&verify=" + verifyhash,
-        headers: headers,
+        url: base_url + "&actions=job2&cid=" + daily_cid, headers: headers,
     }
 
     return new Promise(function (resolve, reject) {
@@ -129,8 +131,7 @@ const dailyJob2 = function () {
 //领取每周任务
 const weekJob = function () {
     let options = {
-        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job&cid=14&nowtime=" + times + "&verify=" + verifyhash,
-        headers: headers,
+        url: base_url + "&actions=job&cid=" + week_cid, headers: headers,
     }
 
     if (week !== 1) {
@@ -150,8 +151,7 @@ const weekJob = function () {
 //完成每周任务
 const weekJob2 = function () {
     let options = {
-        url: "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&actions=job2&cid=14&nowtime=" + times + "&verify=" + verifyhash,
-        headers: headers,
+        url: base_url + "&actions=job2&cid=" + week_cid, headers: headers,
     }
 
     if (week !== 1) {
@@ -173,8 +173,7 @@ async function dailyTask() {
     const week_job_msg = await weekJob();
     const week_job2_msg = await weekJob2();
 
-    let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n" + '领取每周任务：'
-        + week_job_msg + "\r\n" + '完成每周任务：' + week_job2_msg;
+    let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n" + '领取每周任务：' + week_job_msg + "\r\n" + '完成每周任务：' + week_job2_msg;
     gabe.notify('south-plus每日任务', '', msg);
 }
 
