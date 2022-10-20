@@ -133,7 +133,7 @@ const weekJob = function () {
         headers: headers,
     }
 
-    if(week !== 1){
+    if (week !== 1) {
         return new Promise(function (resolve, reject) {
             resolve('不是周一，不用做每周任务');
         });
@@ -154,7 +154,7 @@ const weekJob2 = function () {
         headers: headers,
     }
 
-    if(week !== 1){
+    if (week !== 1) {
         return new Promise(function (resolve, reject) {
             resolve('不是周一，不用做每周任务');
         });
@@ -173,8 +173,8 @@ async function dailyTask() {
     const week_job_msg = await weekJob();
     const week_job2_msg = await weekJob2();
 
-    let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n"+ '领取每周任务：'
-        + week_job_msg + "\r\n"+ '完成每周任务：' + week_job2_msg;
+    let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n" + '领取每周任务：'
+        + week_job_msg + "\r\n" + '完成每周任务：' + week_job2_msg;
     gabe.notify('south-plus每日任务', '', msg);
 }
 
