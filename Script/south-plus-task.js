@@ -109,6 +109,7 @@ const dailyJob = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
+            console.log('领取每日任务' + body);
             resolve(body);
         });
     });
@@ -123,6 +124,7 @@ const dailyJob2 = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
+            console.log('完成每日任务' + body);
             resolve(body);
         });
     });
@@ -142,6 +144,7 @@ const weekJob = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
+            console.log('领取每周任务' + body);
             resolve(body);
         });
     });
@@ -162,6 +165,7 @@ const weekJob2 = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
+            console.log('完成每周任务' + body);
             resolve(body);
         });
     });
