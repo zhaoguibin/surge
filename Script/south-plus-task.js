@@ -104,7 +104,7 @@ const base_url = "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&now
 function getMsg(body)
 {
   let msg_regex = /<!\[CDATA\[(.*)\]\]>/gm;
-  return  msg_regex.exec(body);
+  return  msg_regex.exec(body)[1];
 }
 
 //领取每日任务
