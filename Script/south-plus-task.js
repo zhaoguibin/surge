@@ -101,6 +101,12 @@ const week_cid = 14;//每周任务标识
 const daily_cid = 15;//每日任务标识
 const base_url = "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&nowtime=" + times + "&verify=" + verifyhash;
 
+function getMsg(body)
+{
+  let msg_regex = /<!\[CDATA\[(.*)\]\]>/gm;
+  return  msg_regex.exec(body);
+}
+
 //领取每日任务
 const dailyJob = function () {
     let options = {
@@ -109,7 +115,7 @@ const dailyJob = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
-            console.log('领取每日任务' + body);
+            console.log('领取每日任务' + getMsg(body));
             resolve(body);
         });
     });
@@ -124,7 +130,7 @@ const dailyJob2 = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
-            console.log('完成每日任务' + body);
+            console.log('完成每日任务' + getMsg(body));
             resolve(body);
         });
     });
@@ -144,7 +150,7 @@ const weekJob = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
-            console.log('领取每周任务' + body);
+            console.log('领取每周任务' + getMsg(body));
             resolve(body);
         });
     });
@@ -165,7 +171,7 @@ const weekJob2 = function () {
 
     return new Promise(function (resolve, reject) {
         gabe.get(options, function (errors, response, body) {
-            console.log('完成每周任务' + body);
+            console.log('完成每周任务' + getMsg(body));
             resolve(body);
         });
     });
