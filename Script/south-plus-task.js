@@ -83,15 +83,16 @@ if (!verifyhash) {
 
 
 let headers = {
-    ':method': 'GET',
-    ':scheme': 'https',
-    ':authority': 'south-plus.net',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'accept-encoding': 'gzip, deflate, br',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) EdgiOS/105 Version/13.0.3 Safari/605.1.15',
-    'accept-language': 'zh-CN,zh-Hans;q=0.9',
-    'referer': 'https://south-plus.net/plugin.php?H_name-tasks.html',
-    'cookie': cookie
+    'host': 'south-plus.net',
+    'Sec-Fetch-Site': 'same-origin',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Cookie': cookie,
+    'Sec-Fetch-Mode': 'navigate',
+    'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
+    'Referer': "https://south-plus.net/plugin.php?H_name-tasks.html",
+    "Sec-Fetch-Dest": 'iframe',
+    "Accept-Language": "zh-CN,zh-Hans;q=0.9"
 };
 
 //毫秒时间戳
@@ -101,10 +102,9 @@ const week_cid = 14;//每周任务标识
 const daily_cid = 15;//每日任务标识
 const base_url = "https://south-plus.net/plugin.php?H_name=tasks&action=ajax&nowtime=" + times + "&verify=" + verifyhash;
 
-function getMsg(body)
-{
-  let msg_regex = /<!\[CDATA\[(.*)\]\]>/gm;
-  return  msg_regex.exec(body)[1];
+function getMsg(body) {
+    let msg_regex = /<!\[CDATA\[(.*)\]\]>/gm;
+    return msg_regex.exec(body)[1];
 }
 
 //领取每日任务
