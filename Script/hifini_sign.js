@@ -10,9 +10,7 @@
  *************************/
 
 const isRequest = typeof $request != "undefined"
-//判断请求url是否包含my.htm
-const url_compare = $request.url.indexOf('my.htm') > 0;
-if (isRequest && url_compare) {
+if (isRequest) {
     let cookie = $request.headers.Cookie;
 
     if (!cookie) {
