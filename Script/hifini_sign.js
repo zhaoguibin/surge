@@ -106,5 +106,3 @@ function sign_result(error, response, body) {
 }
 
 sign();
-
-$done();
