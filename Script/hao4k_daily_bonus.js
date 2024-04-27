@@ -12,18 +12,18 @@ if (isRequest) {
 
     if (!cookie) {
         $notification.post('', '', '获取Hao4Kcookie失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(cookie, 'Hao4K_cookie');
 
     if (!$persistentStore.read('Hao4K_cookie')) {
         $notification.post('', '', '保存Hao4Kcookie失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 // Modified from yichahucha
