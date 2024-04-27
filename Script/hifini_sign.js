@@ -91,8 +91,8 @@ const sign = function () {
     return new Promise(function (resolve, reject) {
         gabe.post(options, function (errors, response, body) {
             let msg = '';
-            if (error) {
-                msg = '签到失败:' + error;
+            if (errors) {
+                msg = '签到失败:' + errors;
             }
             let obj = JSON.parse(body);
             if (obj.code == 1) {
@@ -111,6 +111,7 @@ async function startSign() {
     let message = '';
     message = await sign();
     gabe.notify(title, subTitle, message);
+    $done();
 }
+
 startSign();
-$done();
