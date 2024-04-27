@@ -29,7 +29,7 @@ if (isRequest) {
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done();
+    $done({headers});
 } else {
     // Modified from yichahucha
     function gabeX() {
