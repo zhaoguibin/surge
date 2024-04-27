@@ -9,8 +9,11 @@
  hostname = hifini.com
  *************************/
 
+$notification.post('', '', '获取hifini_cookie');
+
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
+ $notification.post('', '', '获取hifini_cookie进入request');
     let cookie = $request.headers.Cookie;
 
     if (!cookie) {
