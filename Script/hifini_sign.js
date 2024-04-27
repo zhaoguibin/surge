@@ -57,7 +57,7 @@ function gabeX() {
 let gabe = gabeX();
 
 //签到
-function sign() {
+const sign = function () {
     let cookie = $persistentStore.read('hifini_cookie');
     if (!cookie) {
         gabe.notify('HIFINI签到', '', '获取cookie失败');
@@ -88,19 +88,29 @@ function sign() {
         body: 'sign=759adb6395c8ab7f5384055704359bcf7771185cf588c41fdcb7443a36a3b888'
     }
 
-    gabe.post(options, sign_result);
+    return new Promise(function (resolve, reject) {
+        gabe.post(options, function (errors, response, body) {
+            let msg = '';
+            if (error) {
+                msg = '签到失败:' + error;
+            }
+            let obj = JSON.parse(body);
+            if (obj.code == 1) {
+                msg = obj.message;
+            } else {
+                msg = obj.message;
+            }
+            resolve(msg);
+        });
+    });
 }
 
-function sign_result(error, response, body) {
-    if (error) {
-        gabe.notify('HIFINI签到', '', 'HIFINI签到失败');
-    }
-    let obj = JSON.parse(body);
-    if (obj.code == 1) {
-        gabe.notify('HIFINI签到', '', obj.message);
-    } else {
-        gabe.notify('HIFINI签到', '', obj.message);
-    }
+async function startSign() {
+    let title = 'HIFINI签到';
+    let subTitle = '';
+    let message = '';
+    message = await sign();
+    gabe.notify(title, subTitle, message);
 }
 
-sign();
+$done();
