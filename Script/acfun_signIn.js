@@ -41,18 +41,18 @@ if (isRequest) {
     for (let key in acfun_params) {
         if (!acfun_params[key]) {
             $notification.post('', '', '获取acfun_' + acfun_params[key] + '失败');
-            $done();
+            $done({});
         }
     }
 
     $persistentStore.write(JSON.stringify(acfun_params), 'acfun_params');
     if (!$persistentStore.read('acfun_params')) {
         $notification.post('', '', '保存acfun_params失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '获取【acfun_params】成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 // Modified from yichahucha
