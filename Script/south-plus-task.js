@@ -15,7 +15,7 @@ if (isRequest) {
     let cookie = $request.headers.Cookie;
     if (!cookie) {
         $notification.post('', '', '获取[south-plus]cookie失败');
-        $done();
+        $done({});
     }
 
     let body = $response.body;
@@ -24,23 +24,23 @@ if (isRequest) {
 
     if (!verifyhash[1]) {
         $notification.post('', '', '获取[south-plus]verifyhash失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(cookie, 'south_plus_cookie');
     if (!$persistentStore.read('south_plus_cookie')) {
         $notification.post('', '', '保存【south_plus_cookie】失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(verifyhash[1], 'south_plus_verifyhash');
     if (!$persistentStore.read('south_plus_verifyhash')) {
         $notification.post('', '', '保存【south_plus_verifyhash】失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 
