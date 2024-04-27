@@ -13,7 +13,7 @@ if (isRequest) {
     let cookie = $request.headers.Cookie;
     if (!cookie) {
         $notification.post('', '', '【银瓜子换硬币】获取bilibili_cookie失败');
-        $done();
+        $done({});
     }
 
     let bili_jct;
@@ -23,23 +23,23 @@ if (isRequest) {
 
     if (!bili_jct) {
         $notification.post('', '', '【银瓜子换硬币】获取bili_jct失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(bili_jct, 'bilibili_bili_jct');
     if (!$persistentStore.read('bilibili_bili_jct')) {
         $notification.post('', '', '【银瓜子换硬币】保存【bilibili_bili_jct】失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(cookie, 'bilibili_cookie');
     if (!$persistentStore.read('bilibili_cookie')) {
         $notification.post('', '', '【银瓜子换硬币】保存【bilibili_cookie】失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '【银瓜子换硬币】获取【bilibili_cookie】成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 
