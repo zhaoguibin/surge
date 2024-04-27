@@ -112,5 +112,5 @@ async function startSign() {
     message = await sign();
     gabe.notify(title, subTitle, message);
 }
-
+startSign();
 $done();
