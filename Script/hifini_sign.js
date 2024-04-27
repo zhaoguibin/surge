@@ -60,7 +60,7 @@ let gabe = gabeX();
 function sign() {
     let cookie = $persistentStore.read('hifini_cookie');
     if (!cookie) {
-        gabe.notify('', '', '获取cookie失败');
+        gabe.notify('HIFINI签到', '', '获取cookie失败');
     }
 
     let options = {
@@ -93,13 +93,13 @@ function sign() {
 
 function sign_result(error, response, body) {
     if (error) {
-        gabe.notify('', '', 'HIFINI签到失败');
+        gabe.notify('HIFINI签到', '', 'HIFINI签到失败');
     }
     let obj = JSON.parse(body);
     if (obj.code == 1) {
-        gabe.notify('', '', obj.message);
+        gabe.notify('HIFINI签到', '', obj.message);
     } else {
-        gabe.notify('', '', obj.message);
+        gabe.notify('HIFINI签到', '', obj.message);
     }
 }
 
