@@ -6,28 +6,27 @@
  个人页面获取到cookie，https://www.hifini.com/my.htm
 
  [MITM]
- hostname = hifini.com
+ hostname = *hifini.com*
  *************************/
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    let headers = $request.headers;
-    let cookie = headers.Cookie;
+    let cookie = $request.headers.Cookie;
 
     if (!cookie) {
         $notification.post('', '', '获取cookie失败');
-        $done({headers});
+        $done({});//使用 $done();中止请求而不返回任何内容。或者使用 $done({});保持请求不变。
     }
 
     $persistentStore.write(cookie, 'hifini_cookie');
 
     if (!$persistentStore.read('hifini_cookie')) {
         $notification.post('', '', '保存cookie失败');
-        $done({headers});
+        $done({});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done({headers});
+    $done({});
 } else {
     // Modified from yichahucha
     function gabeX() {
