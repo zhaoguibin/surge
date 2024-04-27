@@ -9,23 +9,21 @@
  hostname = hifini.com
  *************************/
 
-$notification.post('', '', '获取hifini_cookie');
-
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
- $notification.post('', '', '获取hifini_cookie进入request');
-    let cookie = $request.headers.Cookie;
+    let headers = $request.headers;
+    let cookie = headers.Cookie;
 
     if (!cookie) {
         $notification.post('', '', '获取cookie失败');
-        $done();
+        $done({headers});
     }
 
     $persistentStore.write(cookie, 'hifini_cookie');
 
     if (!$persistentStore.read('hifini_cookie')) {
         $notification.post('', '', '保存cookie失败');
-        $done();
+        $done({headers});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
