@@ -18,30 +18,30 @@ if (isRequest) {
 
     if (!R5nb_c8f5_saltkey) {
         $notification.post('', '', '获取R5nb_c8f5_saltkey失败');
-        $done();
+        $done({});
     }
 
     if (!R5nb_c8f5_auth) {
         $notification.post('', '', '获取R5nb_c8f5_auth失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(R5nb_c8f5_saltkey[1], 'R5nb_c8f5_saltkey');
 
     if (!$persistentStore.read('R5nb_c8f5_saltkey')) {
         $notification.post('', '', '保存R5nb_c8f5_saltkey失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(R5nb_c8f5_auth[1], 'R5nb_c8f5_auth');
 
     if (!$persistentStore.read('R5nb_c8f5_auth')) {
         $notification.post('', '', '保存R5nb_c8f5_auth失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 // Modified from yichahucha
