@@ -17,4 +17,4 @@ hostname = %APPEND% api.m.jd.com,*.bilibili.com,*.acfun.cn,tieba.baidu.com,music
 zgb获取哔哩哔哩的cookie = type=http-request,pattern= http:\/\/m\.bilibili\.com\/space,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/bilibili_silver2coin.js
 吾爱获取Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
 south-plus-cookie = type=http-response,pattern=https:\/\/south\-plus\.net\/u\.php,requires-body=1,max-size=0,debug=0,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/south-plus-task.js
- 获取hifini的cookie = type=http-request,pattern=https:\/\/www\.hifini\.com\/my\.htm,tag=获取hifini的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/script/hifini_sign.js,script-update-interval=0
+获取hifini的cookie = type=http-request,pattern=https:\/\/www\.hifini\.com\/my\.htm,tag=获取hifini的cookie,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/hifini_sign.js,script-update-interval=0
