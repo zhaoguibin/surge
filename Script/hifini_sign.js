@@ -87,13 +87,13 @@ function sign() {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest'
         },
-        body: {'sign:759adb6395c8ab7f5384055704359bcf7771185cf588c41fdcb7443a36a3b888'}
+        body: 'sign=759adb6395c8ab7f5384055704359bcf7771185cf588c41fdcb7443a36a3b888'
     }
 
-    gabe.post(options, result);
+    gabe.post(options, sign_result);
 }
 
-function result(error, response, body) {
+function sign_result(error, response, body) {
     if (error) {
         gabe.notify('', '', 'HIFINI签到失败');
     }
