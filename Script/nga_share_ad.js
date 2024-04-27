@@ -13,7 +13,7 @@ if (isRequest) {
     let cookie = $request.headers.Cookie;
     if (!cookie) {
         $notification.post('', '', '获取NGA_cookie失败');
-        $done();
+        $done({});
     }
 
     let access_uid;
@@ -24,7 +24,7 @@ if (isRequest) {
 
     if (!access_token) {
         $notification.post('', '', '获取access_token失败');
-        $done();
+        $done({});
     }
 
     const access_uid_reg = /ngaPassportUid=([\w\s\d]*)/;
@@ -32,23 +32,23 @@ if (isRequest) {
 
     if (!access_uid) {
         $notification.post('', '', '获取access_uid失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(access_uid, 'NGA_access_uid');
     if (!$persistentStore.read('NGA_access_uid')) {
         $notification.post('', '', '保存NGA_access_uid失败');
-        $done();
+        $done({});
     }
 
     $persistentStore.write(access_token, 'NGA_access_token');
     if (!$persistentStore.read('NGA_access_token')) {
         $notification.post('', '', '保存NGA_access_token失败');
-        $done();
+        $done({});
     }
 
     $notification.post('', '', '获取cookie成功，请禁用此脚本');
-    $done();
+    $done({});
 }
 
 
