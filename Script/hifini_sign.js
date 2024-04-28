@@ -16,12 +16,11 @@ const isRequest = typeof $request != "undefined"
 //  console.log(body);
 //  rep_body = $response.body;
 //  console.log(rep_body);
-//  $done({});
 // }
 
 const isResponse = typeof $response != "undefined"
 if(isResponse){
  rep_body = $response.body;
  console.log(rep_body);
- $done({});
 }
+$done({});
