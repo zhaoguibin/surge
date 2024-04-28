@@ -26,8 +26,8 @@ if (isRequest) {
     }
 
     let body = $response.body;
-    const sign_reg = /var\ssign\s=\s"(.*)"/;
-    sign = sign_reg.exec(body);
+    let sign_reg = /var\ssign\s=\s"(.*)"/;
+    let sign = sign_reg.exec(body);
 
     if (!sign) {
         $notification.post('HIFINI签到', '', '获取sign失败');
