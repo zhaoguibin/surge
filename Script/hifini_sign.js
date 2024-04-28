@@ -13,5 +13,6 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let headers = $request.headers;
  console.log(headers);
+ console.log(headers.Cookie);
     $done({});
 }
