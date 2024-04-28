@@ -10,9 +10,18 @@
  *************************/
 
 const isRequest = typeof $request != "undefined"
-if (isRequest) {
-    let body = $request.body;
- $notification.post('HIFINI签到', '', body);
- console.log(body);
+// if (isRequest) {
+//     let body = $request.body;
+//  $notification.post('HIFINI签到', '', body);
+//  console.log(body);
+//  rep_body = $response.body;
+//  console.log(rep_body);
+//  $done({});
+// }
+
+const isResponse = typeof $response != "undefined"
+if(isResponse){
+ rep_body = $response.body;
+ console.log(rep_body);
  $done({});
 }
