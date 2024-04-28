@@ -25,22 +25,20 @@ if (isRequest) {
         $done({});
     }
 
-    body = $response.body;
+    let body = $response.body;
     const sign_reg = /var\ssign\s=\s"(.*)"/;
     sign = sign_reg.exec(body);
 
-    console.log(sign);
+    if (!sign) {
+        $notification.post('HIFINI签到', '', '获取sign失败');
+        $done({});
+    }
 
-    // if (!sign) {
-    //     $notification.post('HIFINI签到', '', '获取sign失败');
-    //     $done({});
-    // }
-
-    // $persistentStore.write(sign, 'hifini_sign');
-    // if (!$persistentStore.read('hifini_sign')) {
-    //     $notification.post('HIFINI签到', '', '保存sign失败');
-    //     $done({});
-    // }
+    $persistentStore.write(sign, 'hifini_sign');
+    if (!$persistentStore.read('hifini_sign')) {
+        $notification.post('HIFINI签到', '', '保存sign失败');
+        $done({});
+    }
 
     // $notification.post('HIFINI签到', '', '获取cookie成功，请禁用此脚本');
     $done({});
