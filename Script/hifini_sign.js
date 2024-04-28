@@ -11,7 +11,21 @@
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
- rep_body = $response.body;
- console.log(rep_body);
- $done({});
+    body = $response.body;
+    const sign_reg = /var\ssign\s=\s"(.*)"/;
+    sign = sign_reg.exec(body)[1];
+
+    if (!sign) {
+        $notification.post('HIFINI签到', '', '获取sign失败');
+        $done({});
+    }
+
+    $persistentStore.write(sign, 'hifini_sign');
+
+    if (!$persistentStore.read('hifini_sign')) {
+        $notification.post('HIFINI签到', '', '保存sign失败');
+        $done({});
+    }
+    $notification.post('HIFINI签到', '', sign);
+    $done({});
 }
