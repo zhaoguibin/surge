@@ -26,4 +26,6 @@ if (isRequest) {
         $notification.post('HIFINI签到', '', '保存sign失败');
         $done({});
     }
+ $notification.post('HIFINI签到', '', sign);
+ $done({});
 }
