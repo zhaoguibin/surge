@@ -13,5 +13,6 @@ const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let body = $request.body;
  $notification.post('HIFINI签到', '', body);
+ console.log(body);
  $done({});
 }
