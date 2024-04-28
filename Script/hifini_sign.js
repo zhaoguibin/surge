@@ -40,7 +40,7 @@ if (isRequest) {
         $done({});
     }
 
-    // $notification.post('HIFINI签到', '', '获取cookie成功，请禁用此脚本');
+    $notification.post('HIFINI签到', '', '获取cookie成功，请禁用此脚本');
     $done({});
 }
 
