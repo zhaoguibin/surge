@@ -10,7 +10,7 @@
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    let cookie = $request.headers.Cookie;
+    let cookie = $request.Headers.Cookie;
     $notification.post('HIFINI签到', '', cookie);
 
     if (!cookie) {
