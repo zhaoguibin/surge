@@ -10,7 +10,7 @@
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    let cookie = $request.headers.Cookie;
+    let cookie = $request.headers.cookie;
     console.log($request.headers);
   
 
