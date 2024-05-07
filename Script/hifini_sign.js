@@ -11,9 +11,7 @@
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let cookie = $request.headers.cookie;
-    console.log($request.headers);
-  
-
+ 
     if (!cookie) {
         $notification.post('HIFINI签到', '', '获取cookie失败');
         $done({});//使用 $done();中止请求而不返回任何内容。或者使用 $done({});保持请求不变。
