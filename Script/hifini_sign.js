@@ -12,6 +12,7 @@
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
     let cookie = $request.headers.Cookie;
+    $notification.post('HIFINI签到', '', cookie);
 
     if (!cookie) {
         $notification.post('HIFINI签到', '', '获取cookie失败');
