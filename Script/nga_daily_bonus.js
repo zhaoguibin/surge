@@ -186,12 +186,11 @@ function decodeJson(errors, response, body) {
 
     gabe.notify('nga签到', '', msg);
     console.log(body);
-
-    // dailySilverCoins();
-    dailyNCoins();
-    addUpDailyBonus();
 }
 
 checkIn();
+// dailySilverCoins();
+dailyNCoins();
+addUpDailyBonus();
 
 $done();
