@@ -203,9 +203,8 @@ async function dailyTask() {
 
     let msg = '领取每日任务：' + daily_job_msg + "\r\n" + '完成每日任务：' + daily_job2_msg + "\r\n" + '领取每周任务：' + week_job_msg + "\r\n" + '完成每周任务：' + week_job2_msg;
     gabe.notify('south-plus每日任务', '', msg);
+ $done();
 }
 
 
 dailyTask();
-
-$done();
