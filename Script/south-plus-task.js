@@ -18,7 +18,7 @@ if (isRequest) {
         $done({});
     }
 
-     let user_agent = $request.headers.user-/agent;
+     let user_agent = $request.headers.user+'-'+agent;
     if (!user_agent) {
         $notification.post('', '', '获取[south-plus]user_agent失败');
         $done({});
