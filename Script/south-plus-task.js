@@ -5,6 +5,7 @@
  获取cookie
  south-plus-cookie = type=http-response,pattern=https:\/\/south\-plus\.net\/u\.php,requires-body=1,max-size=0,debug=0,script-path=https://raw.githubusercontent.com/zhaoguibin/surge/master/Script/south-plus-task.js
  手机浏览器登录https://south-plus.net之后到【https://south-plus.net/u.php】获取cookie
+ 验证登录需要用到user-agent，手机系统更新user-agent会变
 
  [MITM]
  hostname = south-plus.net
