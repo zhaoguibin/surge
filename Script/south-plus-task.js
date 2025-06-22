@@ -12,7 +12,7 @@
 
 const isRequest = typeof $request != "undefined"
 if (isRequest) {
-    let cookie = $request.headers.Cookie;
+    let cookie = $request.headers.cookie;
     if (!cookie) {
         $notification.post('', '', '获取[south-plus]cookie失败');
         $done({});
