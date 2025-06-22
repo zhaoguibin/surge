@@ -18,6 +18,12 @@ if (isRequest) {
         $done({});
     }
 
+     let user_agent = $request.headers.user-agent;
+    if (!user_agent) {
+        $notification.post('', '', '获取[south-plus]user_agent失败');
+        $done({});
+    }
+
     let body = $response.body;
     const verifyhash_regex = /verifyhash = '(\w+)';/gm;
     const verifyhash = verifyhash_regex.exec(body);
@@ -30,6 +36,12 @@ if (isRequest) {
     $persistentStore.write(cookie, 'south_plus_cookie');
     if (!$persistentStore.read('south_plus_cookie')) {
         $notification.post('', '', '保存【south_plus_cookie】失败');
+        $done({});
+    }
+
+     $persistentStore.write(user_agent, 'south_plus_user_agent');
+    if (!$persistentStore.read('south_plus_user_agent')) {
+        $notification.post('', '', '保存【south_plus_user_agent】失败');
         $done({});
     }
 
@@ -76,6 +88,11 @@ if (!cookie) {
     gabe.notify('', '', '读取【cookie】失败，请手机浏览器登录【https://south-plus.net/u.php】获取');
 }
 
+const user_agent = $persistentStore.read('south_plus_user_agent');
+if (!cookie) {
+    gabe.notify('', '', '读取【user_agent】失败，请手机浏览器登录【https://south-plus.net/u.php】获取');
+}
+
 const verifyhash = $persistentStore.read('south_plus_verifyhash');
 if (!verifyhash) {
     gabe.notify('', '', '读取【south_plus_verifyhash】失败，请手机浏览器登录【https://south-plus.net/u.php】获取');
@@ -89,7 +106,7 @@ let headers = {
     'Cookie': cookie,
     'Sec-Fetch-Mode': 'navigate',
     'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
+    'User-Agent': user_agent,
     'Referer': "https://south-plus.net/plugin.php?H_name-tasks.html",
     "Sec-Fetch-Dest": 'iframe',
     "Accept-Language": "zh-CN,zh-Hans;q=0.9"
